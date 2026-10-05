@@ -101,3 +101,8 @@ First run of the browser tests needs Chromium: `pnpm --filter @quoin/core exec p
 ## Adding a component
 
 See [docs/adding-a-component.md](docs/adding-a-component.md) for the full recipe.
+
+## Why it's built this way
+
+The significant architectural decisions and their rationale are recorded as
+[Architecture Decision Records](docs/adr/).
