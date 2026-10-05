@@ -1,0 +1,25 @@
+{
+  "name": "@quoin/tokens",
+  "version": "0.0.0",
+  "description": "quoin design tokens — DTCG source compiled to CSS custom properties and typed TS.",
+  "type": "module",
+  "files": ["dist"],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./tokens.css": "./dist/tokens.css",
+    "./dark.css": "./dist/dark.css"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "node sd.build.js",
+    "clean": "rm -rf dist",
+    "test": "node --test test/tokens.test.js"
+  },
+  "devDependencies": {
+    "style-dictionary": "^4.3.0"
+  }
+}
