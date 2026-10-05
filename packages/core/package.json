@@ -1,0 +1,39 @@
+{
+  "name": "@quoin/core",
+  "version": "0.0.0",
+  "description": "quoin core — framework-agnostic web components built with Lit.",
+  "type": "module",
+  "files": ["dist"],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "sideEffects": true,
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "clean": "rm -rf dist",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
+  "dependencies": {
+    "@quoin/tokens": "workspace:*",
+    "lit": "^3.2.1"
+  },
+  "devDependencies": {
+    "@storybook/addon-essentials": "^8.4.7",
+    "@storybook/web-components": "^8.4.7",
+    "@storybook/web-components-vite": "^8.4.7",
+    "@vitest/browser": "^2.1.8",
+    "playwright": "^1.49.1",
+    "storybook": "^8.4.7",
+    "tsup": "^8.3.5",
+    "vitest": "^2.1.8"
+  }
+}

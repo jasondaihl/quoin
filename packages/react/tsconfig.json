@@ -1,0 +1,13 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "src",
+    "jsx": "react-jsx",
+    "types": [],
+    // React components use standard class fields; override the Lit-oriented base.
+    "experimentalDecorators": false,
+    "useDefineForClassFields": true
+  },
+  "include": ["src"]
+}
