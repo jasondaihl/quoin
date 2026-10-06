@@ -34,3 +34,4 @@ old one's status to `Superseded by ADR-XXXX` (and link the two).
 | [0004](0004-dtcg-tokens-with-style-dictionary.md) | DTCG tokens + Style Dictionary, two-tier model | Accepted |
 | [0005](0005-pnpm-monorepo.md) | pnpm monorepo (`tokens → core → react`) | Accepted |
 | [0006](0006-real-browser-testing.md) | Real-browser testing with Vitest browser mode | Accepted |
+| [0007](0007-mcp-server.md) | MCP server exposing tokens and component APIs | Accepted |

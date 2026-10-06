@@ -9,14 +9,15 @@ export type QuoinButtonType = 'button' | 'submit' | 'reset';
 /**
  * `<quoin-button>` — the canonical quoin component.
  *
- * Slots:
- *  - (default) — the button label
- *  - `start`   — leading adornment (e.g. an icon)
- *  - `end`     — trailing adornment
+ * @slot - The button label.
+ * @slot start - Leading adornment (e.g. an icon).
+ * @slot end - Trailing adornment.
  *
- * Events:
- *  - `quoin-click` — a `CustomEvent` dispatched on activation (suppressed while
- *    disabled or loading). The underlying native `click` also bubbles (composed).
+ * @fires quoin-click - Dispatched on activation (suppressed while disabled or
+ * loading). The underlying native `click` also bubbles (composed).
+ *
+ * @csspart button - The native `<button>` element.
+ * @csspart spinner - The loading spinner (present only while `loading`).
  */
 @customElement('quoin-button')
 export class QuoinButton extends QuoinElement {

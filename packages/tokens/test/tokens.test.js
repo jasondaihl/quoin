@@ -26,3 +26,21 @@ test('ts module exposes var() references by token path', () => {
   assert.equal(tokens.radius.md, 'var(--quoin-radius-md)');
   assert.equal(tokens.palette.neutral['900'], 'var(--quoin-palette-neutral-900)');
 });
+
+test('tokens.json metadata resolves values, references, and dark overrides', () => {
+  const meta = JSON.parse(readFileSync(new URL('../dist/tokens.json', import.meta.url), 'utf8'));
+  const byPath = new Map(meta.map((t) => [t.path, t]));
+
+  const accent = byPath.get('color.accent.default');
+  assert.equal(accent.tier, 'semantic');
+  assert.equal(accent.cssVar, '--quoin-color-accent-default');
+  assert.equal(accent.value, '#4f46e5'); // light
+  assert.equal(accent.valueDark, '#6366f1'); // dark override
+  assert.equal(accent.reference, '{palette.indigo.600}');
+
+  const space = byPath.get('space.5');
+  assert.equal(space.tier, 'primitive');
+  assert.equal(space.value, '16px');
+  assert.equal(space.reference, null);
+  assert.equal(space.valueDark, undefined); // primitives aren't themed
+});
