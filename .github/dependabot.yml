@@ -26,3 +26,8 @@ updates:
       actions:
         patterns:
           - "*"
+    ignore:
+      # changesets/action v2 requires Changesets CLI v3. Hold at v1 until the
+      # CLI is migrated to v3 (and the action's inputs renamed to *-script).
+      - dependency-name: "changesets/action"
+        update-types: ["version-update:semver-major"]
