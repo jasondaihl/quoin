@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "src",
+    "types": ["node"],
+    // Plain Node/TS module — no Lit decorators here.
+    "experimentalDecorators": false,
+    "useDefineForClassFields": true
+  },
+  "include": ["src"]
+}

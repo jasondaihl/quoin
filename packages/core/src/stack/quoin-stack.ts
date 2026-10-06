@@ -14,6 +14,8 @@ export type QuoinSpaceKey = string;
  *
  * Spacing is expressed as a design-token key (`gap="4"` → `var(--quoin-space-4)`),
  * so layouts stay on the system's spacing scale.
+ *
+ * @slot - The items to lay out.
  */
 @customElement('quoin-stack')
 export class QuoinStack extends QuoinElement {

@@ -14,9 +14,11 @@ let idCounter = 0;
  * participates in a native `<form>` (its value is submitted, and it reports
  * validity) despite living behind a Shadow DOM boundary.
  *
- * Events:
- *  - `quoin-input`  — fired on every keystroke (`detail: { value }`)
- *  - `quoin-change` — fired on commit / blur (`detail: { value }`)
+ * @fires {CustomEvent<{ value: string }>} quoin-input - Fired on every keystroke.
+ * @fires {CustomEvent<{ value: string }>} quoin-change - Fired on commit / blur.
+ *
+ * @csspart input - The native `<input>` element.
+ * @csspart helper - The helper / error text below the field.
  */
 @customElement('quoin-input')
 export class QuoinInput extends QuoinElement {

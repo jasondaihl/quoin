@@ -16,6 +16,9 @@ export type QuoinIconSize = 'sm' | 'md' | 'lg';
  *   <svg viewBox="0 0 24 24">…</svg>
  * </quoin-icon>
  * ```
+ *
+ * @slot - The SVG to render.
+ * @csspart icon - The wrapping `<span>` around the slotted SVG.
  */
 @customElement('quoin-icon')
 export class QuoinIcon extends QuoinElement {

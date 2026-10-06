@@ -10,7 +10,8 @@
       "default": "./dist/index.js"
     },
     "./tokens.css": "./dist/tokens.css",
-    "./dark.css": "./dist/dark.css"
+    "./dark.css": "./dist/dark.css",
+    "./tokens.json": "./dist/tokens.json"
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

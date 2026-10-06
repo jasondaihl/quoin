@@ -14,6 +14,7 @@ plain HTML.
 | [`@quoin/tokens`](packages/tokens) | Design tokens authored in the [W3C DTCG](https://tr.designtokens.org/) format, compiled by [Style Dictionary](https://styledictionary.com) to CSS custom properties + typed TS. |
 | [`@quoin/core`](packages/core) | The web components (`quoin-button`, `quoin-input`, `quoin-stack`, `quoin-icon`). |
 | [`@quoin/react`](packages/react) | React 19 wrappers (`Button`, `Input`, `Stack`, `Icon`). |
+| [`@quoin/mcp`](packages/mcp) | An [MCP](https://modelcontextprotocol.io) server exposing the tokens and component APIs to AI assistants. |
 
 ## Architecture
 
@@ -84,11 +85,39 @@ declaratively. The wrappers handle this: they attach `quoin-click` / `quoin-inpu
 > (Declarative Shadow DOM) is not wired up here, so in frameworks like Next.js use
 > these in client components for now.
 
+## MCP server
+
+[`@quoin/mcp`](packages/mcp) is a [Model Context Protocol](https://modelcontextprotocol.io)
+server that lets an AI assistant (Claude Code/Desktop, Cursor, …) query quoin
+directly instead of guessing: resolve a token to its light/dark value, or get a
+component's full prop/slot/event API with ready-to-paste HTML and React snippets.
+It reads the generated token metadata and Custom Elements Manifest, so its answers
+never drift from the source.
+
+Build it (`pnpm build`), then register the stdio server with your client:
+
+```sh
+# Claude Code
+claude mcp add quoin -- node /absolute/path/to/quoin/packages/mcp/dist/index.js
+```
+
+```jsonc
+// …or a client config (e.g. Claude Desktop)
+{
+  "mcpServers": {
+    "quoin": { "command": "node", "args": ["/absolute/path/to/quoin/packages/mcp/dist/index.js"] }
+  }
+}
+```
+
+Tools: `list_tokens`, `get_token`, `search_tokens`, `list_components`,
+`get_component`. See [`packages/mcp`](packages/mcp) for details.
+
 ## Development
 
 ```sh
 pnpm install
-pnpm build                              # tokens → core → react
+pnpm build                              # tokens → core → react → mcp
 pnpm test                               # all tests (core/react run in Chromium)
 pnpm lint                               # biome
 
