@@ -19,14 +19,15 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@fe02b34f77f8bc703788d5817da081398fad5dd2 # v4.0.0
 
       - name: Set up Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
         with:
           node-version: 20
           cache: pnpm
@@ -34,30 +35,42 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      # Storybook's preview imports @quoin/tokens/tokens.css, so the tokens
-      # package must be built first. Storybook/Vite transpiles @quoin/core's
-      # TypeScript sources itself, so core does not need a prior build.
-      - name: Build tokens
-        run: pnpm --filter @quoin/tokens build
+      # Build every package: the React Storybook imports @quoin/tokens' CSS and
+      # resolves @quoin/core from its built dist, so both must exist first.
+      - name: Build packages
+        run: pnpm build
 
-      - name: Build Storybook
+      - name: Build Core Storybook
         run: pnpm --filter @quoin/core build-storybook
 
+      - name: Build React Storybook
+        run: pnpm --filter @quoin/react build-storybook
+
+      # Assemble a single site: a landing page at the root linking the two
+      # explorers, each served from its own subpath.
+      - name: Assemble site
+        run: |
+          mkdir -p _site/core _site/react
+          cp -r packages/core/storybook-static/. _site/core/
+          cp -r packages/react/storybook-static/. _site/react/
+          cp .github/pages/index.html _site/index.html
+
       - name: Configure Pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5.0.0
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3.0.1
         with:
-          path: packages/core/storybook-static
+          path: _site
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5

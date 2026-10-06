@@ -8,7 +8,8 @@ typed wrappers, so the same `<quoin-button>` works in React, another framework, 
 plain HTML.
 
 **▶ [Explore the components in Storybook](https://jasondaihl.github.io/quoin/)** —
-live docs with light/dark theming, deployed from `main` on every push.
+live docs with light/dark theming for both the [Core web components](https://jasondaihl.github.io/quoin/core/)
+and the [React wrappers](https://jasondaihl.github.io/quoin/react/), deployed from `main` on every push.
 
 ## Packages
 

@@ -1,0 +1,28 @@
+version: 2
+updates:
+  # npm dependencies across the pnpm workspace (Dependabot reads pnpm-lock.yaml).
+  - package-ecosystem: npm
+    directory: "/"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
+    groups:
+      storybook:
+        patterns:
+          - "@storybook/*"
+          - "storybook"
+          - "eslint-plugin-storybook"
+      minor-and-patch:
+        update-types:
+          - minor
+          - patch
+
+  # Keep the pinned action SHAs in the workflows current.
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+    groups:
+      actions:
+        patterns:
+          - "*"
