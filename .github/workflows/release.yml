@@ -47,7 +47,9 @@ jobs:
       - name: Version or publish
         uses: changesets/action@06245a4e0a36c064a573d4150030f5ec548e4fcc # v1.4.10
         with:
-          version: pnpm changeset version
+          # Format after versioning: `changeset version` rewrites package.json
+          # files in a style Biome's formatter would otherwise flag in CI.
+          version: pnpm changeset version && pnpm format
           publish: pnpm release
           title: "chore: version packages"
           commit: "chore: version packages"
