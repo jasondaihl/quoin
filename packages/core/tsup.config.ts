@@ -9,5 +9,5 @@ export default defineConfig({
   clean: true,
   // Lit relies on legacy (experimental) decorators; tell esbuild to match tsconfig.
   tsconfig: './tsconfig.json',
-  external: ['lit', '@quoin/tokens'],
+  external: ['lit', '@jasondaihl/tokens'],
 });

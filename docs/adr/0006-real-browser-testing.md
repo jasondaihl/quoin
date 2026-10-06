@@ -14,7 +14,7 @@ in production.
 ## Decision
 
 Run tests with **Vitest in browser mode** using the **Playwright (Chromium)**
-provider, for both `@quoin/core` and `@quoin/react`.
+provider, for both `@jasondaihl/core` and `@jasondaihl/react`.
 
 ## Consequences
 

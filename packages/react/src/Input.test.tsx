@@ -1,4 +1,4 @@
-import type { QuoinInput } from '@quoin/core';
+import type { QuoinInput } from '@jasondaihl/core';
 import { act } from 'react';
 import { type Root, createRoot } from 'react-dom/client';
 import { afterEach, expect, test, vi } from 'vitest';

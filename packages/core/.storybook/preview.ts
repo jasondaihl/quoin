@@ -1,7 +1,7 @@
 import type { Preview } from '@storybook/web-components';
 // Load quoin tokens globally so the CSS custom properties exist on :root, then
 // register every quoin element.
-import '@quoin/tokens/tokens.css';
+import '@jasondaihl/tokens/tokens.css';
 import '../src/index.js';
 
 /**

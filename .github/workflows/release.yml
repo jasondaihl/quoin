@@ -4,17 +4,19 @@ on:
   push:
     branches: [main]
 
-# Lets the Changesets action open and update the "Version Packages" PR.
+# contents/pull-requests: open & update the "Version Packages" PR.
+# packages: publish to GitHub Packages.
 permissions:
   contents: write
   pull-requests: write
+  packages: write
 
 concurrency:
   group: release
   cancel-in-progress: false
 
 jobs:
-  version:
+  release:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -30,27 +32,25 @@ jobs:
         with:
           node-version: 20
           cache: pnpm
+          # Writes an .npmrc pointing the @jasondaihl scope at GitHub Packages,
+          # authenticated via NODE_AUTH_TOKEN (set on the release step below).
+          registry-url: https://npm.pkg.github.com
+          scope: "@jasondaihl"
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      # Versioning only: as changesets land on main, this opens/updates a
-      # "Version Packages" PR that bumps versions + writes changelogs. Merging
-      # that PR does NOT publish anything — no `publish` input is set.
-      #
-      # TODO(publish): once the package scope matches an owner we control
-      # (rename @quoin/* -> @jasondaihl/*, or move the repo into an org), turn
-      # on publishing to GitHub Packages:
-      #   1. add `packages: write` to permissions above
-      #   2. add `publishConfig.registry: https://npm.pkg.github.com` to each
-      #      publishable package.json (and set changeset access to "public")
-      #   3. add the `publish:` input below and an .npmrc auth step, e.g.
-      #        publish: pnpm release
-      - name: Create Version PR
+      # As changesets land on main, `version` opens/updates a "Version Packages"
+      # PR (bumps versions + changelogs). When that PR is merged and no
+      # changesets remain, `publish` runs the root `release` script
+      # (`pnpm build && changeset publish`) to publish to GitHub Packages.
+      - name: Version or publish
         uses: changesets/action@06245a4e0a36c064a573d4150030f5ec548e4fcc # v1.4.10
         with:
           version: pnpm changeset version
+          publish: pnpm release
           title: "chore: version packages"
           commit: "chore: version packages"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -8,5 +8,5 @@ export default defineConfig({
   sourcemap: true,
   clean: true,
   tsconfig: './tsconfig.json',
-  external: ['react', 'react-dom', '@quoin/core'],
+  external: ['react', 'react-dom', '@jasondaihl/core'],
 });
