@@ -73,3 +73,24 @@ pnpm changeset          # record intended version bumps in a PR
 pnpm version-packages   # apply bumps + update changelogs
 pnpm release            # build + publish
 ```
+
+Releases are automated by `.github/workflows/release.yml`: as changesets land on
+`main`, it opens a **"Version Packages" PR**; merging that PR publishes the
+packages to **GitHub Packages** (`@jasondaihl/*`).
+
+Two optional repository secrets make the Version-PR flow fully hands-off (the
+workflow works without them, but the Version PR then needs CI triggered manually
+and its commit signed by hand):
+
+- **`RELEASE_TOKEN`** — a Personal Access Token used to push the Version PR, so
+  CI runs on it (the default `GITHUB_TOKEN` can't trigger other workflows) and
+  its commits are attributed. Fine-grained PAT on this repo with
+  **Contents: Read/Write** and **Pull requests: Read/Write**.
+- **`SSH_SIGNING_KEY`** — the private half of an SSH **signing** key whose public
+  half is registered as a signing key on the committer's GitHub account. Lets the
+  workflow sign the version commit so it satisfies `main`'s required-signatures
+  rule. Use a dedicated key, or reuse your local signing key
+  (`~/.ssh/id_ed25519_signing`).
+
+Publishing itself uses the built-in `GITHUB_TOKEN` (it has `packages:write`), so
+no npm token is required.
