@@ -7,6 +7,9 @@ Components are authored once as custom elements and exposed to React through sma
 typed wrappers, so the same `<quoin-button>` works in React, another framework, or
 plain HTML.
 
+**▶ [Explore the components in Storybook](https://jasondaihl.github.io/quoin/)** —
+live docs with light/dark theming, deployed from `main` on every push.
+
 ## Packages
 
 | Package | What it is |
