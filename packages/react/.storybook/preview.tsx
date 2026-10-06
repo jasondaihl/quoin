@@ -1,6 +1,6 @@
 import type { Preview } from '@storybook/react';
 // Tokens must be present on :root; importing core (via the Button) registers the element.
-import '@jasondaihl/tokens/tokens.css';
+import '@jasondaihl/quoin-tokens/tokens.css';
 
 function applyTheme(theme: string) {
   document.documentElement.setAttribute('data-theme', theme);

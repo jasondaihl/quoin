@@ -15,7 +15,7 @@ const BUILD_PATH = 'dist/';
 // Also emitted (see below):
 //   dist/tokens.json — a flat metadata array (path, cssVar, type, tier, resolved
 //                      light `value` + dark `valueDark`, alias `reference`) that
-//                      the @jasondaihl/mcp server reads to answer token queries.
+//                      the @jasondaihl/quoin-mcp server reads to answer token queries.
 
 // Explicit transform list: we deliberately omit `size/rem` so authored dimension strings
 // (e.g. "12px") pass through verbatim, and keep `color/css` to normalize hex values.
@@ -44,7 +44,7 @@ StyleDictionary.registerFormat({
   },
 });
 
-// Emit a flat metadata array consumed by @jasondaihl/mcp. Values are already resolved
+// Emit a flat metadata array consumed by @jasondaihl/quoin-mcp. Values are already resolved
 // (references substituted) by Style Dictionary; `reference` preserves the authored
 // alias (e.g. "{palette.indigo.600}") when the token is an alias.
 StyleDictionary.registerFormat({

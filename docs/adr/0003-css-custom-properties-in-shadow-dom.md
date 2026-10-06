@@ -24,7 +24,7 @@ once on the document `:root`.
   `data-theme` switch on an ancestor re-themes every component with no component
   changes — the central property we wanted ([ADR-0004](0004-dtcg-tokens-with-style-dictionary.md)).
 - Costs we accept: no utility-class authoring ergonomics, and consumers must load
-  `@jasondaihl/tokens/tokens.css` once for the variables to exist.
+  `@jasondaihl/quoin-tokens/tokens.css` once for the variables to exist.
 
 ## Alternatives considered
 

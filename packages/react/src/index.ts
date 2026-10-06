@@ -1,4 +1,4 @@
-// @jasondaihl/react — thin React 19 wrappers around the quoin web components.
+// @jasondaihl/quoin-react — thin React 19 wrappers around the quoin web components.
 export { Button } from './Button.js';
 export type { ButtonProps } from './Button.js';
 

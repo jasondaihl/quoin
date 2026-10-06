@@ -1,12 +1,12 @@
 import type { ReactNode, Ref } from 'react';
-import '@jasondaihl/core';
+import '@jasondaihl/quoin-core';
 import type {
   QuoinSpaceKey,
   QuoinStack,
   QuoinStackAlign,
   QuoinStackDirection,
   QuoinStackJustify,
-} from '@jasondaihl/core';
+} from '@jasondaihl/quoin-core';
 
 interface QuoinStackIntrinsic {
   ref?: Ref<QuoinStack>;

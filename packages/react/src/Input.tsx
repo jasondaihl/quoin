@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef } from 'react';
 import type { MutableRefObject, ReactNode, Ref } from 'react';
-import '@jasondaihl/core';
-import type { QuoinInput, QuoinInputType } from '@jasondaihl/core';
+import '@jasondaihl/quoin-core';
+import type { QuoinInput, QuoinInputType } from '@jasondaihl/quoin-core';
 
 interface QuoinInputIntrinsic {
   ref?: Ref<QuoinInput>;

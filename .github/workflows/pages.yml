@@ -35,16 +35,16 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      # Build every package: the React Storybook imports @jasondaihl/tokens' CSS and
-      # resolves @jasondaihl/core from its built dist, so both must exist first.
+      # Build every package: the React Storybook imports @jasondaihl/quoin-tokens' CSS and
+      # resolves @jasondaihl/quoin-core from its built dist, so both must exist first.
       - name: Build packages
         run: pnpm build
 
       - name: Build Core Storybook
-        run: pnpm --filter @jasondaihl/core build-storybook
+        run: pnpm --filter @jasondaihl/quoin-core build-storybook
 
       - name: Build React Storybook
-        run: pnpm --filter @jasondaihl/react build-storybook
+        run: pnpm --filter @jasondaihl/quoin-react build-storybook
 
       # Assemble a single site: a landing page at the root linking the two
       # explorers, each served from its own subpath.

@@ -44,7 +44,7 @@ let cache: ComponentInfo[] | undefined;
 
 function loadManifest(): ComponentInfo[] {
   if (cache) return cache;
-  const file = require.resolve('@jasondaihl/core/custom-elements.json');
+  const file = require.resolve('@jasondaihl/quoin-core/custom-elements.json');
   // biome-ignore lint/suspicious/noExplicitAny: the CEM is external, loosely-typed JSON.
   const manifest = JSON.parse(readFileSync(file, 'utf8')) as any;
 
