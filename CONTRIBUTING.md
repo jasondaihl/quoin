@@ -12,7 +12,7 @@ keep `main` healthy and keep future-me from having to re-derive decisions.
   ```
 - The browser tests need Chromium (one-time):
   ```sh
-  pnpm --filter @jasondaihl/core exec playwright install chromium
+  pnpm --filter @jasondaihl/quoin-core exec playwright install chromium
   ```
 
 ## Everyday commands
@@ -25,8 +25,8 @@ pnpm test         # all tests (core/react run in real Chromium)
 pnpm lint         # biome check
 pnpm format       # biome format --write
 
-pnpm --filter @jasondaihl/core storybook     # web-component docs  (:6006)
-pnpm --filter @jasondaihl/react storybook    # React docs          (:6007)
+pnpm --filter @jasondaihl/quoin-core storybook     # web-component docs  (:6006)
+pnpm --filter @jasondaihl/quoin-react storybook    # React docs          (:6007)
 ```
 
 ## Branch & PR workflow
@@ -53,8 +53,8 @@ and add the public key to your GitHub account as a **Signing key**.
 ## Adding a component
 
 Follow the step-by-step in [docs/adding-a-component.md](docs/adding-a-component.md):
-author the web component in `@jasondaihl/core`, test it, add a story, export it, then
-wrap it for React in `@jasondaihl/react`.
+author the web component in `@jasondaihl/quoin-core`, test it, add a story, export it, then
+wrap it for React in `@jasondaihl/quoin-react`.
 
 ## Recording a decision (ADRs)
 

@@ -1,4 +1,4 @@
-# @jasondaihl/react
+# @jasondaihl/quoin-react
 
 ## 0.1.0
 
@@ -12,4 +12,4 @@
 
 - Updated dependencies [9f7b575]
 - Updated dependencies [03abdde]
-  - @jasondaihl/core@0.1.0
+  - @jasondaihl/quoin-core@0.1.0

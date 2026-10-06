@@ -1,5 +1,5 @@
 {
-  "name": "@jasondaihl/core",
+  "name": "@jasondaihl/quoin-core",
   "version": "0.1.0",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
@@ -34,7 +34,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "@jasondaihl/tokens": "workspace:*",
+    "@jasondaihl/quoin-tokens": "workspace:*",
     "lit": "^3.2.1"
   },
   "devDependencies": {

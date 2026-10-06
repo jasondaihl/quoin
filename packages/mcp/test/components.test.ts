@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { getComponent, listComponents } from '../src/components.js';
 
-// Assert against the real @jasondaihl/core Custom Elements Manifest (built before mcp).
+// Assert against the real @jasondaihl/quoin-core Custom Elements Manifest (built before mcp).
 
 describe('listComponents', () => {
   it('lists every component with tag + React name', () => {

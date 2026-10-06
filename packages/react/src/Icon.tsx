@@ -1,6 +1,6 @@
 import type { ReactNode, Ref } from 'react';
-import '@jasondaihl/core';
-import type { QuoinIcon, QuoinIconSize } from '@jasondaihl/core';
+import '@jasondaihl/quoin-core';
+import type { QuoinIcon, QuoinIconSize } from '@jasondaihl/quoin-core';
 
 interface QuoinIconIntrinsic {
   ref?: Ref<QuoinIcon>;

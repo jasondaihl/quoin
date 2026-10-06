@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
 
-// A single entry from @jasondaihl/tokens' generated dist/tokens.json metadata.
+// A single entry from @jasondaihl/quoin-tokens' generated dist/tokens.json metadata.
 export interface TokenMeta {
   /** Dotted token path, e.g. "color.accent.default". */
   path: string;
@@ -28,7 +28,7 @@ let cache: TokenMeta[] | undefined;
 
 function allTokens(): TokenMeta[] {
   if (!cache) {
-    const file = require.resolve('@jasondaihl/tokens/tokens.json');
+    const file = require.resolve('@jasondaihl/quoin-tokens/tokens.json');
     cache = JSON.parse(readFileSync(file, 'utf8')) as TokenMeta[];
   }
   return cache;

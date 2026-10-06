@@ -1,11 +1,11 @@
-# @jasondaihl/mcp
+# @jasondaihl/quoin-mcp
 
 A [Model Context Protocol](https://modelcontextprotocol.io) server that exposes
 quoin's **design tokens** and **component APIs** to an AI assistant over stdio, so
 it can build quoin UI correctly instead of guessing.
 
 The server reads the **generated, authoritative artifacts** from the other
-packages — `@jasondaihl/tokens`' token metadata (`dist/tokens.json`) and `@jasondaihl/core`'s
+packages — `@jasondaihl/quoin-tokens`' token metadata (`dist/tokens.json`) and `@jasondaihl/quoin-core`'s
 [Custom Elements Manifest](https://github.com/webcomponents/custom-elements-manifest)
 (`dist/custom-elements.json`) — so its answers can't drift from the source. See
 [ADR-0007](../../docs/adr/0007-mcp-server.md) for the rationale.
@@ -57,5 +57,5 @@ the structured JSDoc tags (`@slot`, `@fires`, `@csspart`) current when authoring
 component. The **one** hand-maintained piece is
 [`src/react-hints.ts`](src/react-hints.ts), which maps each custom event to its
 React callback prop name (e.g. `quoin-input` → `onValueInput`) — that rename exists
-only in `@jasondaihl/react`, so it can't be derived from the manifest. Update it when the
+only in `@jasondaihl/quoin-react`, so it can't be derived from the manifest. Update it when the
 React wrappers' event props change.

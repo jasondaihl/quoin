@@ -5,7 +5,7 @@ component to its React wrapper. `quoin-button` is the reference example.
 
 Say you're adding a `Badge`.
 
-## 1. Author the web component (`@jasondaihl/core`)
+## 1. Author the web component (`@jasondaihl/quoin-core`)
 
 Create `packages/core/src/badge/quoin-badge.ts`:
 
@@ -40,11 +40,11 @@ export { QuoinBadge } from './badge/quoin-badge.js';
 export type { QuoinBadgeVariant } from './badge/quoin-badge.js';
 ```
 
-## 5. Wrap it for React (`@jasondaihl/react`)
+## 5. Wrap it for React (`@jasondaihl/quoin-react`)
 
 Create `packages/react/src/Badge.tsx`:
 
-- `import '@jasondaihl/core'` (registers the element).
+- `import '@jasondaihl/quoin-core'` (registers the element).
 - Augment `JSX.IntrinsicElements` with the tag + its attribute types.
 - Forward props straight through; accept `ref` as a prop (React 19).
 - Bridge any **custom** events with a `ref` + `useEffect`

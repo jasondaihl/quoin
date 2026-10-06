@@ -16,8 +16,8 @@ a React component as a Web Component later — is effectively a rewrite.
 
 ## Decision
 
-Author each component **once as a framework-agnostic Web Component** (`@jasondaihl/core`)
-and expose it to React through a **thin wrapper** (`@jasondaihl/react`).
+Author each component **once as a framework-agnostic Web Component** (`@jasondaihl/quoin-core`)
+and expose it to React through a **thin wrapper** (`@jasondaihl/quoin-react`).
 
 ## Consequences
 

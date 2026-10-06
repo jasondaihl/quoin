@@ -1,7 +1,7 @@
 // The one hand-maintained bit of this server.
 //
 // The Custom Elements Manifest describes the *web components* precisely, but it
-// can't know how the thin React wrappers in `@jasondaihl/react` rename things. React
+// can't know how the thin React wrappers in `@jasondaihl/quoin-react` rename things. React
 // uses `className` (not `class`) and bridges each custom event to a callback prop
 // with its own name/signature. Keep this table in sync with packages/react/src/*.tsx.
 

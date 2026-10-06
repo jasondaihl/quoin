@@ -1,4 +1,4 @@
-// @jasondaihl/core — framework-agnostic web components built with Lit.
+// @jasondaihl/quoin-core — framework-agnostic web components built with Lit.
 //
 // Importing from this entry point registers every quoin custom element as a
 // side effect (via Lit's `@customElement` decorator), and re-exports the

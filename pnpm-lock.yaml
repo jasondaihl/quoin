@@ -20,7 +20,7 @@ importers:
 
   packages/core:
     dependencies:
-      '@jasondaihl/tokens':
+      '@jasondaihl/quoin-tokens':
         specifier: workspace:*
         version: link:../tokens
       lit:
@@ -57,10 +57,10 @@ importers:
 
   packages/mcp:
     dependencies:
-      '@jasondaihl/core':
+      '@jasondaihl/quoin-core':
         specifier: workspace:*
         version: link:../core
-      '@jasondaihl/tokens':
+      '@jasondaihl/quoin-tokens':
         specifier: workspace:*
         version: link:../tokens
       '@modelcontextprotocol/sdk':
@@ -85,11 +85,11 @@ importers:
 
   packages/react:
     dependencies:
-      '@jasondaihl/core':
+      '@jasondaihl/quoin-core':
         specifier: workspace:*
         version: link:../core
     devDependencies:
-      '@jasondaihl/tokens':
+      '@jasondaihl/quoin-tokens':
         specifier: workspace:*
         version: link:../tokens
       '@storybook/addon-essentials':

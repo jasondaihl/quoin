@@ -1,5 +1,5 @@
 {
-  "name": "@jasondaihl/mcp",
+  "name": "@jasondaihl/quoin-mcp",
   "version": "0.1.0",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
@@ -32,8 +32,8 @@
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.32.1",
-    "@jasondaihl/core": "workspace:*",
-    "@jasondaihl/tokens": "workspace:*",
+    "@jasondaihl/quoin-core": "workspace:*",
+    "@jasondaihl/quoin-tokens": "workspace:*",
     "zod": "^4.6.5"
   },
   "devDependencies": {
