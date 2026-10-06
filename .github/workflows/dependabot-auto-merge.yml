@@ -1,0 +1,47 @@
+name: Dependabot auto-merge
+
+# Auto-approve and enable auto-merge for Dependabot patch/minor updates so they
+# land on their own once `verify` is green and the branch is up to date. Major
+# bumps are intentionally left for a human to review and merge.
+#
+# `pull_request` is the supported trigger for this: for Dependabot-initiated
+# runs GitHub honours the `permissions:` block below (the token is otherwise
+# read-only). No PR code is checked out or executed here — only gh API calls —
+# so running in the PR's context is safe.
+on: pull_request
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  auto-merge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    # Only act on Dependabot's own PRs.
+    if: ${{ github.actor == 'dependabot[bot]' }}
+    steps:
+      - name: Fetch Dependabot metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@25dd0e34f4fe68f24cc83900b1fe3fe149efef98 # v3.1.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      # main's ruleset requires one approving review for the bot's commits
+      # (require_extra_approval_for_unattributed_changes). The Actions bot
+      # supplies it; approving is enabled via the repo's workflow permissions.
+      - name: Approve
+        if: ${{ steps.metadata.outputs.update-type != 'version-update:semver-major' }}
+        run: gh pr review --approve "$PR_URL"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Queue the squash merge. GitHub completes it once `verify` passes and the
+      # branch is up to date; if it falls behind, Dependabot rebases it.
+      - name: Enable auto-merge
+        if: ${{ steps.metadata.outputs.update-type != 'version-update:semver-major' }}
+        run: gh pr merge --auto --squash "$PR_URL"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
