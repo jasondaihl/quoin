@@ -1,6 +1,14 @@
 {
-  "name": "@quoin/react",
+  "name": "@jasondaihl/react",
   "version": "0.0.0",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jasondaihl/quoin.git",
+    "directory": "packages/react"
+  },
   "description": "quoin React — thin React 19 wrappers around the quoin web components.",
   "type": "module",
   "files": ["dist"],
@@ -25,10 +33,10 @@
     "react-dom": "^19.0.0"
   },
   "dependencies": {
-    "@quoin/core": "workspace:*"
+    "@jasondaihl/core": "workspace:*"
   },
   "devDependencies": {
-    "@quoin/tokens": "workspace:*",
+    "@jasondaihl/tokens": "workspace:*",
     "@storybook/addon-essentials": "^8.4.7",
     "@storybook/react": "^8.4.7",
     "@storybook/react-vite": "^8.4.7",

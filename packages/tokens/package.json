@@ -1,6 +1,14 @@
 {
-  "name": "@quoin/tokens",
+  "name": "@jasondaihl/tokens",
   "version": "0.0.0",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jasondaihl/quoin.git",
+    "directory": "packages/tokens"
+  },
   "description": "quoin design tokens — DTCG source compiled to CSS custom properties and typed TS.",
   "type": "module",
   "files": ["dist"],

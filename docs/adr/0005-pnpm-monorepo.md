@@ -11,8 +11,8 @@ publish at different cadences and should be consumable independently.
 
 ## Decision
 
-Use a **pnpm workspace** with three packages — `@quoin/tokens`, `@quoin/core`,
-`@quoin/react` — built in topological order, with Changesets for versioning and
+Use a **pnpm workspace** with three packages — `@jasondaihl/tokens`, `@jasondaihl/core`,
+`@jasondaihl/react` — built in topological order, with Changesets for versioning and
 release.
 
 ## Consequences

@@ -1,6 +1,14 @@
 {
-  "name": "@quoin/mcp",
+  "name": "@jasondaihl/mcp",
   "version": "0.0.0",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jasondaihl/quoin.git",
+    "directory": "packages/mcp"
+  },
   "description": "quoin MCP — a Model Context Protocol server exposing quoin's design tokens and component APIs to AI assistants.",
   "type": "module",
   "files": ["dist"],
@@ -24,8 +32,8 @@
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.32.1",
-    "@quoin/core": "workspace:*",
-    "@quoin/tokens": "workspace:*",
+    "@jasondaihl/core": "workspace:*",
+    "@jasondaihl/tokens": "workspace:*",
     "zod": "^4.6.5"
   },
   "devDependencies": {

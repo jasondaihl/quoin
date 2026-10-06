@@ -1,13 +1,13 @@
 import { useCallback, useEffect, useRef } from 'react';
 import type { MutableRefObject, ReactNode, Ref } from 'react';
 // Importing the core package registers <quoin-button> as a side effect.
-import '@quoin/core';
+import '@jasondaihl/core';
 import type {
   QuoinButton,
   QuoinButtonSize,
   QuoinButtonType,
   QuoinButtonVariant,
-} from '@quoin/core';
+} from '@jasondaihl/core';
 
 /**
  * Teach TypeScript about the `<quoin-button>` custom element in JSX. React 19

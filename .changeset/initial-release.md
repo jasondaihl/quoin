@@ -1,7 +1,7 @@
 ---
-"@quoin/tokens": minor
-"@quoin/core": minor
-"@quoin/react": minor
+"@jasondaihl/tokens": minor
+"@jasondaihl/core": minor
+"@jasondaihl/react": minor
 ---
 
 Initial release of quoin: design tokens (DTCG → CSS variables + typed TS), core

@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { getToken, listTokens, searchTokens, tokenGroups } from '../src/tokens.js';
 
-// These assert against the real @quoin/tokens metadata (built before mcp in the
+// These assert against the real @jasondaihl/tokens metadata (built before mcp in the
 // topological `pnpm build`/`pnpm test`).
 
 describe('getToken', () => {

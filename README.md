@@ -15,15 +15,15 @@ and the [React wrappers](https://jasondaihl.github.io/quoin/react/), deployed fr
 
 | Package | What it is |
 |---------|------------|
-| [`@quoin/tokens`](packages/tokens) | Design tokens authored in the [W3C DTCG](https://tr.designtokens.org/) format, compiled by [Style Dictionary](https://styledictionary.com) to CSS custom properties + typed TS. |
-| [`@quoin/core`](packages/core) | The web components (`quoin-button`, `quoin-input`, `quoin-stack`, `quoin-icon`). |
-| [`@quoin/react`](packages/react) | React 19 wrappers (`Button`, `Input`, `Stack`, `Icon`). |
-| [`@quoin/mcp`](packages/mcp) | An [MCP](https://modelcontextprotocol.io) server exposing the tokens and component APIs to AI assistants. |
+| [`@jasondaihl/tokens`](packages/tokens) | Design tokens authored in the [W3C DTCG](https://tr.designtokens.org/) format, compiled by [Style Dictionary](https://styledictionary.com) to CSS custom properties + typed TS. |
+| [`@jasondaihl/core`](packages/core) | The web components (`quoin-button`, `quoin-input`, `quoin-stack`, `quoin-icon`). |
+| [`@jasondaihl/react`](packages/react) | React 19 wrappers (`Button`, `Input`, `Stack`, `Icon`). |
+| [`@jasondaihl/mcp`](packages/mcp) | An [MCP](https://modelcontextprotocol.io) server exposing the tokens and component APIs to AI assistants. |
 
 ## Architecture
 
 ```
-@quoin/tokens  →  @quoin/core (Lit)  →  @quoin/react (wrappers)
+@jasondaihl/tokens  →  @jasondaihl/core (Lit)  →  @jasondaihl/react (wrappers)
 ```
 
 Tokens are **two-tier**: primitive values (`palette.indigo.600`, `space.4`) and
@@ -38,13 +38,13 @@ The token CSS variables live on `:root`; custom properties inherit through the
 Shadow DOM, so components just read them.
 
 ```ts
-import '@quoin/tokens/tokens.css';
+import '@jasondaihl/tokens/tokens.css';
 ```
 
 ### 2a. Use the web components anywhere
 
 ```ts
-import '@quoin/core'; // registers all elements
+import '@jasondaihl/core'; // registers all elements
 ```
 
 ```html
@@ -54,7 +54,7 @@ import '@quoin/core'; // registers all elements
 ### 2b. …or the React wrappers
 
 ```tsx
-import { Button, Input, Stack } from '@quoin/react';
+import { Button, Input, Stack } from '@jasondaihl/react';
 
 <Stack gap="5">
   <Input label="Email" type="email" required />
@@ -91,7 +91,7 @@ declaratively. The wrappers handle this: they attach `quoin-click` / `quoin-inpu
 
 ## MCP server
 
-[`@quoin/mcp`](packages/mcp) is a [Model Context Protocol](https://modelcontextprotocol.io)
+[`@jasondaihl/mcp`](packages/mcp) is a [Model Context Protocol](https://modelcontextprotocol.io)
 server that lets an AI assistant (Claude Code/Desktop, Cursor, …) query quoin
 directly instead of guessing: resolve a token to its light/dark value, or get a
 component's full prop/slot/event API with ready-to-paste HTML and React snippets.
@@ -125,11 +125,11 @@ pnpm build                              # tokens → core → react → mcp
 pnpm test                               # all tests (core/react run in Chromium)
 pnpm lint                               # biome
 
-pnpm --filter @quoin/core storybook     # web-component docs  (:6006)
-pnpm --filter @quoin/react storybook    # React docs          (:6007)
+pnpm --filter @jasondaihl/core storybook     # web-component docs  (:6006)
+pnpm --filter @jasondaihl/react storybook    # React docs          (:6007)
 ```
 
-First run of the browser tests needs Chromium: `pnpm --filter @quoin/core exec playwright install chromium`.
+First run of the browser tests needs Chromium: `pnpm --filter @jasondaihl/core exec playwright install chromium`.
 
 ## Adding a component
 

@@ -17,16 +17,16 @@ its answers from drifting out of sync with the components and tokens they descri
 
 ## Decision
 
-Add a fourth workspace package **`@quoin/mcp`** that runs an MCP server over
+Add a fourth workspace package **`@jasondaihl/mcp`** that runs an MCP server over
 **stdio**, exposing both **design tokens** (`list_tokens`, `get_token`,
 `search_tokens`) and **component APIs** (`list_components`, `get_component`, with
 HTML + React usage snippets).
 
 The server reads **generated, authoritative artifacts**, never hand-copied data:
 
-- `@quoin/tokens` emits `dist/tokens.json` (a metadata build target alongside the
+- `@jasondaihl/tokens` emits `dist/tokens.json` (a metadata build target alongside the
   existing CSS/JS outputs) with each token's resolved light/dark value and alias.
-- `@quoin/core` emits `dist/custom-elements.json`, a
+- `@jasondaihl/core` emits `dist/custom-elements.json`, a
   [Custom Elements Manifest](https://github.com/webcomponents/custom-elements-manifest)
   generated from the Lit sources by `@custom-elements-manifest/analyzer`.
 
@@ -36,13 +36,13 @@ to their React callback prop names, since that rename exists only in the wrapper
 ## Consequences
 
 - The server stays in sync with the components/tokens for free: both manifests are
-  regenerated on every build, and `@quoin/mcp` depends on both, so it builds and
+  regenerated on every build, and `@jasondaihl/mcp` depends on both, so it builds and
   tests last in the existing topological `pnpm -r` order.
 - Authoring components keeps paying off: structured JSDoc (`@slot`, `@fires`,
   `@csspart`) now also feeds the manifest, so it's worth keeping current.
 - Costs we accept: a new published package with a `bin`, an extra build step in
-  `@quoin/core` (the analyzer), and the small `react-hints` table to keep aligned
-  with `@quoin/react`.
+  `@jasondaihl/core` (the analyzer), and the small `react-hints` table to keep aligned
+  with `@jasondaihl/react`.
 
 ## Alternatives considered
 

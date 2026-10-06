@@ -5,7 +5,7 @@ import { getComponent, listComponents } from './components.js';
 import { getToken, listTokens, searchTokens, tokenGroups } from './tokens.js';
 
 // quoin MCP server: exposes the design system's tokens and component APIs to an
-// AI assistant over stdio, reading the generated @quoin/tokens and @quoin/core
+// AI assistant over stdio, reading the generated @jasondaihl/tokens and @jasondaihl/core
 // manifests so the answers never drift from the source.
 
 const server = new McpServer({ name: 'quoin', version: '0.0.0' });

@@ -1,6 +1,14 @@
 {
-  "name": "@quoin/core",
+  "name": "@jasondaihl/core",
   "version": "0.0.0",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jasondaihl/quoin.git",
+    "directory": "packages/core"
+  },
   "description": "quoin core — framework-agnostic web components built with Lit.",
   "type": "module",
   "files": ["dist"],
@@ -26,7 +34,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "@quoin/tokens": "workspace:*",
+    "@jasondaihl/tokens": "workspace:*",
     "lit": "^3.2.1"
   },
   "devDependencies": {
