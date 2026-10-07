@@ -1,6 +1,9 @@
 {
   "color": {
     "$type": "color",
+    "text": {
+      "on-accent": { "$value": "{palette.neutral.950}" }
+    },
     "accent": {
       "default": { "$value": "{palette.cyan.600}" },
       "hover": { "$value": "{palette.cyan.700}" },
@@ -8,7 +11,7 @@
       "subtle": { "$value": "{palette.cyan.50}" }
     },
     "focus": {
-      "ring": { "$value": "{palette.cyan.500}" }
+      "ring": { "$value": "{palette.cyan.600}" }
     }
   }
 }

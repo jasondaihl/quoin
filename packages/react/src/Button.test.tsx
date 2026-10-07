@@ -3,6 +3,7 @@ import { act } from 'react';
 import { type Root, createRoot } from 'react-dom/client';
 import { afterEach, expect, test, vi } from 'vitest';
 import { Button } from './Button.js';
+import { expectNoA11yViolations } from './test-utils.js';
 
 let container: HTMLElement;
 let root: Root;
@@ -61,4 +62,10 @@ test('bridges the quoin-click custom event to onClick', async () => {
   el.shadowRoot?.querySelector('button')?.click();
   expect(onClick).toHaveBeenCalledTimes(1);
   expect(onClick.mock.calls[0][0].type).toBe('quoin-click');
+});
+
+test('has no axe violations', async () => {
+  const el = render(<Button variant="danger">Delete</Button>);
+  await el.updateComplete;
+  await expectNoA11yViolations(container);
 });

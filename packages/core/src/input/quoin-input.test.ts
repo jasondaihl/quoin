@@ -1,5 +1,6 @@
 import { afterEach, expect, test, vi } from 'vitest';
 import '../index.js';
+import { expectNoA11yViolations } from '../test-utils.js';
 import type { QuoinInput } from './quoin-input.js';
 
 async function mount(markup: string): Promise<HTMLElement> {
@@ -56,4 +57,15 @@ test('shows error text when invalid', async () => {
   const helper = el.shadowRoot?.querySelector('.helper');
   expect(helper?.classList.contains('error')).toBe(true);
   expect(helper?.textContent?.trim()).toBe('Required');
+});
+
+test('has no axe violations across representative states', async () => {
+  for (const markup of [
+    '<quoin-input label="Name"></quoin-input>',
+    '<quoin-input label="Email" required helper-text="We never share it"></quoin-input>',
+    '<quoin-input label="Email" invalid error-text="Enter a valid email"></quoin-input>',
+  ]) {
+    const el = await mount(markup);
+    await expectNoA11yViolations(el);
+  }
 });

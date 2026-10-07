@@ -12,11 +12,12 @@
     "text": {
       "default": { "$value": "{palette.neutral.900}" },
       "muted": { "$value": "{palette.neutral.500}" },
-      "on-accent": { "$value": "{palette.neutral.0}" }
+      "on-accent": { "$value": "{palette.neutral.0}" },
+      "on-danger": { "$value": "{palette.neutral.0}" }
     },
     "border": {
       "default": { "$value": "{palette.neutral.200}" },
-      "strong": { "$value": "{palette.neutral.300}" }
+      "strong": { "$value": "{palette.neutral.500}" }
     },
     "accent": {
       "default": { "$value": "{palette.indigo.600}" },

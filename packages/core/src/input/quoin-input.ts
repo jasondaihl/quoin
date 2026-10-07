@@ -185,6 +185,8 @@ export class QuoinInput extends QuoinElement {
   override render() {
     const showError = this.invalid && this.errorText !== '';
     const helper = showError ? this.errorText : this.helperText;
+    // Link the helper/error text to the input so assistive tech announces it with the field.
+    const helperId = `${this.inputId}-helper`;
     return html`
       <div class="field">
         ${
@@ -205,12 +207,14 @@ export class QuoinInput extends QuoinElement {
           ?disabled=${this.disabled}
           ?required=${this.required}
           aria-invalid=${this.invalid ? 'true' : 'false'}
+          aria-describedby=${helper ? helperId : nothing}
+          aria-errormessage=${showError ? helperId : nothing}
           @input=${this.handleInput}
           @change=${this.handleChange}
         />
         ${
           helper
-            ? html`<span class="helper ${showError ? 'error' : ''}" part="helper">${helper}</span>`
+            ? html`<span id=${helperId} class="helper ${showError ? 'error' : ''}" part="helper">${helper}</span>`
             : nothing
         }
       </div>

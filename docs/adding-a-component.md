@@ -26,6 +26,11 @@ Create `packages/core/src/badge/quoin-badge.test.ts`. Mount the element, `await
 el.updateComplete`, and assert against the shadow root. Tests run in Chromium via
 `vitest` browser mode, so Shadow DOM and custom-element upgrades behave for real.
 
+Add an accessibility check with `expectNoA11yViolations` (from `../test-utils.js`) over the
+component's representative states — it runs axe-core against the element, gating roles,
+names, and ARIA. Contrast is covered separately by the tokens contrast test, so it's
+disabled in that helper. See [ADR-0009](adr/0009-accessibility-wcag-aa.md).
+
 ## 3. Add a story
 
 Create `packages/core/src/badge/quoin-badge.stories.ts` (CSF3, `html` from `lit`).

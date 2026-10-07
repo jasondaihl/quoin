@@ -1,5 +1,6 @@
 import { afterEach, expect, test, vi } from 'vitest';
 import '../index.js';
+import { expectNoA11yViolations } from '../test-utils.js';
 import type { QuoinButton } from './quoin-button.js';
 
 async function mount(markup: string): Promise<QuoinButton> {
@@ -57,4 +58,17 @@ test('shows a spinner and blocks activation while loading', async () => {
   expect(el.shadowRoot?.querySelector('button')?.disabled).toBe(true);
   el.shadowRoot?.querySelector('button')?.click();
   expect(handler).not.toHaveBeenCalled();
+});
+
+test('has no axe violations across representative states', async () => {
+  for (const markup of [
+    '<quoin-button>Save</quoin-button>',
+    '<quoin-button variant="danger">Delete</quoin-button>',
+    '<quoin-button loading>Saving</quoin-button>',
+    '<quoin-button disabled>Nope</quoin-button>',
+    '<quoin-button aria-label="Search"></quoin-button>',
+  ]) {
+    const el = await mount(markup);
+    await expectNoA11yViolations(el);
+  }
 });

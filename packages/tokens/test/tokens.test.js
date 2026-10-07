@@ -49,9 +49,13 @@ test('tokens.json metadata resolves values, references, and dark overrides', () 
   const accent = byPath.get('color.accent.default');
   assert.equal(accent.tier, 'semantic');
   assert.equal(accent.cssVar, '--quoin-color-accent-default');
-  assert.equal(accent.value, '#4f46e5'); // light
-  assert.equal(accent.valueDark, '#6366f1'); // dark override
+  assert.equal(accent.value, '#4f46e5'); // light (indigo.600)
   assert.equal(accent.reference, '{palette.indigo.600}');
+
+  // bg flips between light and dark — a clear themed override carried in the metadata.
+  const bg = byPath.get('color.bg.default');
+  assert.equal(bg.value, '#ffffff'); // light
+  assert.equal(bg.valueDark, '#09090b'); // dark override
 
   const space = byPath.get('space.5');
   assert.equal(space.tier, 'primitive');

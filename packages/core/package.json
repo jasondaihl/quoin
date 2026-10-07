@@ -39,10 +39,12 @@
   },
   "devDependencies": {
     "@custom-elements-manifest/analyzer": "^0.11.0",
+    "@storybook/addon-a11y": "^8.6.18",
     "@storybook/addon-essentials": "^8.4.7",
     "@storybook/web-components": "^8.4.7",
     "@storybook/web-components-vite": "^8.4.7",
     "@vitest/browser": "^2.1.8",
+    "axe-core": "^4.14.0",
     "playwright": "^1.49.1",
     "storybook": "^8.4.7",
     "tsup": "^8.3.5",

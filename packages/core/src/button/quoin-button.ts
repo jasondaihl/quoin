@@ -106,7 +106,7 @@ export class QuoinButton extends QuoinElement {
 
       :host([variant='danger']) button {
         background-color: var(--quoin-color-danger-default);
-        color: var(--quoin-color-text-on-accent);
+        color: var(--quoin-color-text-on-danger);
       }
       :host([variant='danger']) button:hover {
         background-color: var(--quoin-color-danger-hover);
