@@ -23,6 +23,10 @@ The base brand's light values sit on `:root`; its dark values override under
 Any role the brand *doesn't* override falls through to the base light/dark value. That's
 why an overlay only needs to declare what actually differs.
 
+![The button gallery across the Default and Ocean brands in light and dark. The accent
+(primary) color tracks the brand while backgrounds track the mode; danger stays red in
+every cell because it isn't part of the overlay.](assets/brand-theme-matrix.png)
+
 ## 1. Add a palette ramp (`@jasondaihl/quoin-tokens`)
 
 A brand usually needs a new primitive color ramp for its accent. Add it to
