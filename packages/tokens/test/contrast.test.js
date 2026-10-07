@@ -27,17 +27,28 @@ const blocks = parseBlocks(css);
 
 // Compose each theme by layering selector blocks in cascade order (later wins).
 const layer = (...selectors) => Object.assign({}, ...selectors.map((s) => blocks[s] ?? {}));
+
+// Discover brands from the stylesheet so every brand is checked without edits here.
+const brands = [
+  ...new Set(
+    Object.keys(blocks)
+      .map((sel) => sel.match(/\[data-brand="([^"]+)"\]/)?.[1])
+      .filter(Boolean),
+  ),
+];
 const themes = {
   'default/light': layer(':root'),
   'default/dark': layer(':root', '[data-theme="dark"]'),
-  'ocean/light': layer(':root', '[data-brand="ocean"]'),
-  'ocean/dark': layer(
+};
+for (const brand of brands) {
+  themes[`${brand}/light`] = layer(':root', `[data-brand="${brand}"]`);
+  themes[`${brand}/dark`] = layer(
     ':root',
     '[data-theme="dark"]',
-    '[data-brand="ocean"]',
-    '[data-brand="ocean"][data-theme="dark"]',
-  ),
-};
+    `[data-brand="${brand}"]`,
+    `[data-brand="${brand}"][data-theme="dark"]`,
+  );
+}
 
 // --- WCAG relative-luminance contrast (sRGB) ---------------------------------------------
 function luminance(hex) {

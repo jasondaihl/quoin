@@ -108,7 +108,7 @@ function printType(node, indent) {
 // docs/adding-a-theme.md. To add a brand: author its override files under
 // tokens/semantic/brands/<name>/ and add its name to BRANDS below.
 const BASE_BRAND = 'default';
-const BRANDS = ['default', 'ocean'];
+const BRANDS = ['default', 'ocean', 'sunset', 'forest'];
 const MODES = ['light', 'dark'];
 
 // Build one (brand, mode) Style Dictionary layer. The base brand's light build is special:
