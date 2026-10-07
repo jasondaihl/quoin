@@ -1,5 +1,12 @@
 # @jasondaihl/quoin-core
 
+## 0.2.3
+
+### Patch Changes
+
+- Updated dependencies [3a0107e]
+  - @jasondaihl/quoin-tokens@0.5.0
+
 ## 0.2.2
 
 ### Patch Changes
