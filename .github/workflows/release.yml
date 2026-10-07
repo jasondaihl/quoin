@@ -19,20 +19,24 @@ jobs:
   release:
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    env:
-      # Optional secrets that smooth out the Version-PR flow (see below). Both
-      # fall back gracefully: without RELEASE_TOKEN the default GITHUB_TOKEN is
-      # used; without SSH_SIGNING_KEY the version commit is simply unsigned.
-      RELEASE_TOKEN: ${{ secrets.RELEASE_TOKEN }}
-      SSH_SIGNING_KEY: ${{ secrets.SSH_SIGNING_KEY }}
     steps:
+      # Mint a short-lived GitHub App installation token. Commits/PRs pushed with
+      # it are attributed to the app and DO trigger CI on the Version PR (unlike
+      # the default GITHUB_TOKEN, which never triggers further workflows). The app
+      # is a bypass actor for main's required-signatures rule, so the (unsigned)
+      # Version commit can be merged — the squash onto main is GitHub-signed
+      # regardless, so main history stays verified. No PAT to expire or re-mint.
+      - name: Generate a GitHub App token
+        id: app-token
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          app-id: ${{ secrets.RELEASE_APP_ID }}
+          private-key: ${{ secrets.RELEASE_APP_PRIVATE_KEY }}
+
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
-          # Use a PAT when available so the Version PR's commits are pushed by a
-          # real user — that makes CI run on the PR (the default GITHUB_TOKEN
-          # does not trigger further workflows) and attributes the commits.
-          token: ${{ secrets.RELEASE_TOKEN || github.token }}
+          token: ${{ steps.app-token.outputs.token }}
 
       - name: Install pnpm
         uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
@@ -49,23 +53,6 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-
-      # Sign the version commit with SSH so it satisfies main's required-
-      # signatures rule and merges without manual intervention. Skipped when the
-      # secret isn't set. The public half of this key must be registered as a
-      # *signing key* on the committer's GitHub account, and the email below
-      # must be a verified account email, for GitHub to mark it "Verified".
-      - name: Configure commit signing
-        if: ${{ env.SSH_SIGNING_KEY != '' }}
-        run: |
-          install -m 700 -d ~/.ssh
-          printf '%s\n' "$SSH_SIGNING_KEY" > ~/.ssh/signing_key
-          chmod 600 ~/.ssh/signing_key
-          git config user.name "Jason Daihl"
-          git config user.email "jason@daihl.com"
-          git config gpg.format ssh
-          git config user.signingkey ~/.ssh/signing_key
-          git config commit.gpgsign true
 
       # As changesets land on main, `version` opens/updates a "Version Packages"
       # PR (bumps versions + changelogs). When that PR is merged and no
@@ -84,8 +71,8 @@ jobs:
           title: "chore: version packages"
           commit: "chore: version packages"
         env:
-          # PAT (if set) so the PR/commits trigger CI and are attributed; falls
-          # back to GITHUB_TOKEN. NODE_AUTH_TOKEN stays GITHUB_TOKEN — it has the
+          # App token so the Version PR triggers CI and is attributed to the app.
+          # NODE_AUTH_TOKEN stays the default GITHUB_TOKEN — it carries the
           # packages:write scope needed to publish to GitHub Packages.
-          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN || github.token }}
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
