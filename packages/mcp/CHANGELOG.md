@@ -1,5 +1,13 @@
 # @jasondaihl/quoin-mcp
 
+## 0.2.1
+
+### Patch Changes
+
+- Updated dependencies [51c9b4d]
+  - @jasondaihl/quoin-tokens@0.3.0
+  - @jasondaihl/quoin-core@0.2.1
+
 ## 0.2.0
 
 ### Minor Changes
