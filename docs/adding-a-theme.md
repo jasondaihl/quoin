@@ -72,6 +72,13 @@ aliasing into your new ramp. Mirror the light→dark step pattern the base and `
 If the brand needs to diverge further (its own backgrounds, text, borders), add those roles
 too — anything you omit inherits from the base.
 
+**Contrast is enforced.** `packages/tokens/test/contrast.test.js` checks WCAG AA across every
+brand×mode theme, so a new brand must pass (see [ADR-0009](adr/0009-accessibility-wcag-aa.md)).
+A common gotcha: a **light accent** (like Ocean's cyan) fails white-text AA, so the brand
+should override `color.text.on-accent` to a **dark** value rather than darkening the accent —
+Ocean sets it to `{palette.neutral.950}` in both modes and keeps its vibrant cyan. Run
+`pnpm --filter @jasondaihl/quoin-tokens test` to see exactly which pairs pass.
+
 ## 3. Register the brand in the build
 
 Add the name to the `BRANDS` list in `packages/tokens/sd.build.js`:

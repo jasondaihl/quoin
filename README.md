@@ -80,6 +80,13 @@ changes needed, because every component reads only semantic variables:
 Flipping either attribute re-themes the whole tree. Adding a brand is a short recipe —
 see [Adding a theme](docs/adding-a-theme.md) and [ADR-0008](docs/adr/0008-multi-brand-theming.md).
 
+## Accessibility
+
+WCAG AA is a tested contract, not a hope. A tokens test checks color contrast for every
+semantic role pair across **all** brand×mode themes, and axe-core runs against each
+component in its real-browser tests; Storybook also carries a live a11y panel per story.
+See [ADR-0009](docs/adr/0009-accessibility-wcag-aa.md).
+
 ## React + custom events
 
 React 19 sets custom-element *properties* (so `variant`, `disabled`, `value` etc.

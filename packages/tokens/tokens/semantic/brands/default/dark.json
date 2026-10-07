@@ -12,24 +12,25 @@
     "text": {
       "default": { "$value": "{palette.neutral.50}" },
       "muted": { "$value": "{palette.neutral.400}" },
-      "on-accent": { "$value": "{palette.neutral.0}" }
+      "on-accent": { "$value": "{palette.neutral.0}" },
+      "on-danger": { "$value": "{palette.neutral.0}" }
     },
     "border": {
       "default": { "$value": "{palette.neutral.800}" },
-      "strong": { "$value": "{palette.neutral.700}" }
+      "strong": { "$value": "{palette.neutral.500}" }
     },
     "accent": {
-      "default": { "$value": "{palette.indigo.500}" },
-      "hover": { "$value": "{palette.indigo.400}" },
-      "active": { "$value": "{palette.indigo.300}" },
+      "default": { "$value": "{palette.indigo.600}" },
+      "hover": { "$value": "{palette.indigo.500}" },
+      "active": { "$value": "{palette.indigo.400}" },
       "subtle": { "$value": "{palette.indigo.900}" }
     },
     "focus": {
       "ring": { "$value": "{palette.indigo.400}" }
     },
     "danger": {
-      "default": { "$value": "{palette.red.500}" },
-      "hover": { "$value": "{palette.red.400}" }
+      "default": { "$value": "{palette.red.600}" },
+      "hover": { "$value": "{palette.red.700}" }
     },
     "success": {
       "default": { "$value": "{palette.green.500}" }

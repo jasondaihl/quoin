@@ -11,7 +11,7 @@ describe('getToken', () => {
     expect(accent?.tier).toBe('semantic');
     expect(accent?.cssVar).toBe('--quoin-color-accent-default');
     expect(accent?.value).toBe('#4f46e5');
-    expect(accent?.valueDark).toBe('#6366f1');
+    expect(accent?.valueDark).toBe('#4f46e5'); // dark accent is indigo.600 too (AA with white text)
     expect(accent?.reference).toBe('{palette.indigo.600}');
   });
 

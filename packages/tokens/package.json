@@ -26,7 +26,7 @@
   "scripts": {
     "build": "node sd.build.js",
     "clean": "rm -rf dist",
-    "test": "node --test test/tokens.test.js"
+    "test": "node --test test/tokens.test.js test/contrast.test.js"
   },
   "devDependencies": {
     "style-dictionary": "^4.3.0"

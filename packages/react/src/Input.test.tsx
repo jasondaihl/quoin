@@ -3,6 +3,7 @@ import { act } from 'react';
 import { type Root, createRoot } from 'react-dom/client';
 import { afterEach, expect, test, vi } from 'vitest';
 import { Input } from './Input.js';
+import { expectNoA11yViolations } from './test-utils.js';
 
 let container: HTMLElement;
 let root: Root;
@@ -35,4 +36,10 @@ test('bridges quoin-input to onValueInput', async () => {
   native.value = 'Ada';
   native.dispatchEvent(new Event('input', { bubbles: true }));
   expect(onValueInput).toHaveBeenCalledWith('Ada');
+});
+
+test('has no axe violations (labeled, invalid with error)', async () => {
+  const el = render(<Input label="Email" invalid errorText="Enter a valid email" />);
+  await el.updateComplete;
+  await expectNoA11yViolations(container);
 });
