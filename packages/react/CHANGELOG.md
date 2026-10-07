@@ -1,5 +1,11 @@
 # @jasondaihl/quoin-react
 
+## 0.2.3
+
+### Patch Changes
+
+- @jasondaihl/quoin-core@0.2.3
+
 ## 0.2.2
 
 ### Patch Changes
