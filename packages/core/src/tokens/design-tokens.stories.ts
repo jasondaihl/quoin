@@ -87,7 +87,7 @@ export const Colors: Story = {
   render: () =>
     section(
       'Semantic colors',
-      'Role-based colors components reference. Flip the Theme toolbar to see the dark values resolve.',
+      'Role-based colors components reference. Flip the Theme toolbar for dark values, and the Brand toolbar (e.g. Ocean) to re-point accent/focus — the swatches read live CSS, so they re-theme in place. The literal values below are the default brand’s reference values.',
       group('color').map(colorCard),
     ),
 };

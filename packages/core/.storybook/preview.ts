@@ -5,14 +5,19 @@ import '@jasondaihl/quoin-tokens/tokens.css';
 import '../src/index.js';
 
 /**
- * Reflect the selected theme onto the document root. Because components consume
- * only semantic CSS variables, flipping `data-theme` re-themes everything with
- * zero component changes — the key property of the token system.
+ * Reflect the selected brand + theme onto the document root. Because components
+ * consume only semantic CSS variables, setting `data-brand` / `data-theme` re-themes
+ * everything with zero component changes — the key property of the token system.
+ * Brand (default/ocean) and theme (light/dark) are independent axes.
  */
-function applyTheme(theme: string) {
-  document.documentElement.setAttribute('data-theme', theme);
-  document.documentElement.style.background = 'var(--quoin-color-bg-default)';
-  document.documentElement.style.color = 'var(--quoin-color-text-default)';
+function applyGlobals(theme: string, brand: string) {
+  const root = document.documentElement;
+  root.setAttribute('data-theme', theme);
+  // The default brand lives on :root, so it has no [data-brand] selector — clear it.
+  if (brand === 'default') root.removeAttribute('data-brand');
+  else root.setAttribute('data-brand', brand);
+  root.style.background = 'var(--quoin-color-bg-default)';
+  root.style.color = 'var(--quoin-color-text-default)';
 }
 
 const preview: Preview = {
@@ -35,10 +40,23 @@ const preview: Preview = {
         dynamicTitle: true,
       },
     },
+    brand: {
+      description: 'quoin brand',
+      defaultValue: 'default',
+      toolbar: {
+        title: 'Brand',
+        icon: 'paintbrush',
+        items: [
+          { value: 'default', title: 'Default', icon: 'circle' },
+          { value: 'ocean', title: 'Ocean', icon: 'circle' },
+        ],
+        dynamicTitle: true,
+      },
+    },
   },
   decorators: [
     (story, context) => {
-      applyTheme(context.globals.theme ?? 'light');
+      applyGlobals(context.globals.theme ?? 'light', context.globals.brand ?? 'default');
       return story();
     },
   ],
