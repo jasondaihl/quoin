@@ -99,25 +99,56 @@ function printType(node, indent) {
 
 // --- Builds ---------------------------------------------------------------------------
 
-// Light: all primitives + light semantics → :root. Also emits the JS/TS var modules.
-const light = new StyleDictionary({
-  source: ['tokens/primitive/**/*.json', 'tokens/semantic/light.json'],
-  usesDtcg: true,
-  log: { verbosity: 'silent' },
-  platforms: {
-    css: {
-      transforms: TRANSFORMS,
-      prefix: PREFIX,
-      buildPath: BUILD_PATH,
-      files: [
-        {
-          destination: 'tokens.css',
-          format: 'css/variables',
-          options: { selector: ':root', outputReferences: false },
-        },
-      ],
-    },
-    js: {
+// Theming has two orthogonal axes: BRAND (default, ocean, …) and MODE (light, dark).
+// The `default` brand is the base: its light set defines every token on :root (primitives
+// + semantics) and its dark set overrides the semantic color roles under [data-theme="dark"].
+// Every other brand is a thin OVERLAY — it re-declares only the semantic roles it changes,
+// scoped to [data-brand="<name>"] (light) and [data-brand="<name>"][data-theme="dark"]. CSS
+// cascade/specificity then resolves any brand×mode combination. See docs/adr/0008 and
+// docs/adding-a-theme.md. To add a brand: author its override files under
+// tokens/semantic/brands/<name>/ and add its name to BRANDS below.
+const BASE_BRAND = 'default';
+const BRANDS = ['default', 'ocean'];
+const MODES = ['light', 'dark'];
+
+// Build one (brand, mode) Style Dictionary layer. The base brand's light build is special:
+// it alone emits the primitives and the JS/TS/JSON artifacts (metadata tracks the base brand).
+function sdFor(brand, mode) {
+  const isBase = brand === BASE_BRAND;
+  const isLight = mode === 'light';
+
+  // Selector for this layer: base light → :root; otherwise compose the attribute scopes.
+  const brandSel = isBase ? '' : `[data-brand="${brand}"]`;
+  const modeSel = isLight ? '' : '[data-theme="dark"]';
+  const selector = `${brandSel}${modeSel}` || ':root';
+
+  // Base light emits everything (primitives included); every other layer is semantic-only.
+  const semanticOnly = !(isBase && isLight);
+
+  const cssFile = {
+    destination: `_${brand}.${mode}.css`,
+    format: 'css/variables',
+    options: { selector, outputReferences: false },
+    ...(semanticOnly ? { filter: isSemantic } : {}),
+  };
+  const files = [cssFile];
+
+  // Base dark also emits the dark semantic values, merged into tokens.json as `valueDark`.
+  if (isBase && !isLight) {
+    files.push({
+      destination: '_tokens.dark.json',
+      format: 'json/quoin-metadata',
+      filter: isSemantic,
+    });
+  }
+
+  const platforms = {
+    css: { transforms: TRANSFORMS, prefix: PREFIX, buildPath: BUILD_PATH, files },
+  };
+
+  // Base light alone emits the JS/TS var modules and the metadata JSON (base-brand values).
+  if (isBase && isLight) {
+    platforms.js = {
       transforms: TRANSFORMS,
       prefix: PREFIX,
       buildPath: BUILD_PATH,
@@ -126,53 +157,37 @@ const light = new StyleDictionary({
         { destination: 'index.d.ts', format: 'typescript/quoin-dts' },
         { destination: 'tokens.json', format: 'json/quoin-metadata' },
       ],
-    },
-  },
-});
+    };
+  }
 
-// Dark: primitives present so references resolve, but only semantic color roles are output,
-// scoped to [data-theme="dark"].
-const dark = new StyleDictionary({
-  source: ['tokens/primitive/**/*.json', 'tokens/semantic/dark.json'],
-  usesDtcg: true,
-  log: { verbosity: 'silent' },
-  platforms: {
-    css: {
-      transforms: TRANSFORMS,
-      prefix: PREFIX,
-      buildPath: BUILD_PATH,
-      files: [
-        {
-          destination: '_dark.css',
-          format: 'css/variables',
-          filter: isSemantic,
-          options: { selector: '[data-theme="dark"]', outputReferences: false },
-        },
-        // Dark semantic values, merged into tokens.json below as `valueDark`.
-        {
-          destination: '_tokens.dark.json',
-          format: 'json/quoin-metadata',
-          filter: isSemantic,
-        },
-      ],
-    },
-  },
-});
+  return new StyleDictionary({
+    source: ['tokens/primitive/**/*.json', `tokens/semantic/brands/${brand}/${mode}.json`],
+    usesDtcg: true,
+    log: { verbosity: 'silent' },
+    platforms,
+  });
+}
 
-await light.buildAllPlatforms();
-await dark.buildAllPlatforms();
+// Build each layer to its own temp CSS fragment, collected in cascade order:
+// base :root, base dark, then each overlay brand's light then dark.
+const fragments = [];
+for (const brand of BRANDS) {
+  for (const mode of MODES) {
+    await sdFor(brand, mode).buildAllPlatforms();
+    fragments.push(path.join(BUILD_PATH, `_${brand}.${mode}.css`));
+  }
+}
 
-// Concatenate the dark override onto tokens.css, then remove the temp file.
+// Concatenate the fragments into tokens.css, keeping only the first banner comment.
+const BANNER = /^\/\*\*[\s\S]*?\*\/\s*/;
+const cssParts = await Promise.all(fragments.map((f) => fs.readFile(f, 'utf8')));
 const tokensCssPath = path.join(BUILD_PATH, 'tokens.css');
-const darkCssPath = path.join(BUILD_PATH, '_dark.css');
-const [lightCss, darkCss] = await Promise.all([
-  fs.readFile(tokensCssPath, 'utf8'),
-  fs.readFile(darkCssPath, 'utf8'),
-]);
-// Drop the auto-generated banner comment from the dark partial before appending.
-const darkBody = darkCss.replace(/^\/\*\*[\s\S]*?\*\/\s*/, '');
-await fs.writeFile(tokensCssPath, `${lightCss}\n${darkBody}`, 'utf8');
-await fs.rm(darkCssPath);
+await fs.writeFile(
+  tokensCssPath,
+  cssParts.map((css, i) => (i === 0 ? css : css.replace(BANNER, ''))).join('\n'),
+  'utf8',
+);
+await Promise.all(fragments.map((f) => fs.rm(f)));
 
 // Merge dark semantic values into the metadata as `valueDark`, then drop the temp file.
 const tokensJsonPath = path.join(BUILD_PATH, 'tokens.json');

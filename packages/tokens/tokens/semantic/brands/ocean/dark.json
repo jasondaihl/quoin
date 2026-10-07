@@ -1,0 +1,14 @@
+{
+  "color": {
+    "$type": "color",
+    "accent": {
+      "default": { "$value": "{palette.cyan.500}" },
+      "hover": { "$value": "{palette.cyan.400}" },
+      "active": { "$value": "{palette.cyan.300}" },
+      "subtle": { "$value": "{palette.cyan.900}" }
+    },
+    "focus": {
+      "ring": { "$value": "{palette.cyan.400}" }
+    }
+  }
+}

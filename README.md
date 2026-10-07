@@ -8,7 +8,7 @@ typed wrappers, so the same `<quoin-button>` works in React, another framework, 
 plain HTML.
 
 **▶ [Explore the components in Storybook](https://jasondaihl.github.io/quoin/)** —
-live docs with light/dark theming for both the [Core web components](https://jasondaihl.github.io/quoin/core/)
+live docs with light/dark and multi-brand theming for both the [Core web components](https://jasondaihl.github.io/quoin/core/)
 and the [React wrappers](https://jasondaihl.github.io/quoin/react/), deployed from `main` on every push.
 
 ## Packages
@@ -66,15 +66,19 @@ import { Button, Input, Stack } from '@jasondaihl/quoin-react';
 
 ## Theming
 
-Light is the default (`:root`). Switch to dark by setting an attribute on any
-ancestor — no component changes needed:
+Theming runs on two independent axes, both driven by attributes — no component
+changes needed, because every component reads only semantic variables:
+
+- **Mode** — light is the default (`:root`); switch to dark with `data-theme="dark"`.
+- **Brand** — the default accent lives on `:root`; switch with `data-brand` (e.g.
+  the built-in `ocean` brand).
 
 ```html
-<html data-theme="dark">
+<html data-theme="dark" data-brand="ocean">
 ```
 
-Because every component reads semantic variables, flipping `data-theme` re-themes
-the whole tree.
+Flipping either attribute re-themes the whole tree. Adding a brand is a short recipe —
+see [Adding a theme](docs/adding-a-theme.md) and [ADR-0008](docs/adr/0008-multi-brand-theming.md).
 
 ## React + custom events
 

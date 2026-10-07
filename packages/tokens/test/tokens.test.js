@@ -21,6 +21,21 @@ test('css defines a light :root and a dark theme override', () => {
   assert.doesNotMatch(darkBlock, /--quoin-palette-/);
 });
 
+test('css defines the ocean brand as a semantic-only overlay', () => {
+  // Light overlay: scoped to [data-brand="ocean"], re-points accent to the cyan ramp.
+  assert.match(css, /\[data-brand="ocean"\]\s*\{/);
+  const oceanBlock = css.slice(css.indexOf('[data-brand="ocean"] {'));
+  assert.match(oceanBlock, /--quoin-color-accent-default:\s*#0891b2/);
+  // An overlay re-declares only the roles it changes — never primitives or untouched roles.
+  assert.doesNotMatch(oceanBlock, /--quoin-palette-/);
+  assert.doesNotMatch(oceanBlock, /--quoin-color-bg-default:/);
+
+  // Dark overlay has higher specificity so it wins for brand+dark combinations.
+  assert.match(css, /\[data-brand="ocean"\]\[data-theme="dark"\]\s*\{/);
+  const oceanDarkBlock = css.slice(css.indexOf('[data-brand="ocean"][data-theme="dark"]'));
+  assert.match(oceanDarkBlock, /--quoin-color-accent-default:\s*#06b6d4/);
+});
+
 test('ts module exposes var() references by token path', () => {
   assert.equal(tokens.color.accent.default, 'var(--quoin-color-accent-default)');
   assert.equal(tokens.radius.md, 'var(--quoin-radius-md)');

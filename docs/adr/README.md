@@ -35,3 +35,4 @@ old one's status to `Superseded by ADR-XXXX` (and link the two).
 | [0005](0005-pnpm-monorepo.md) | pnpm monorepo (`tokens → core → react`) | Accepted |
 | [0006](0006-real-browser-testing.md) | Real-browser testing with Vitest browser mode | Accepted |
 | [0007](0007-mcp-server.md) | MCP server exposing tokens and component APIs | Accepted |
+| [0008](0008-multi-brand-theming.md) | Multi-brand theming on a brand × mode axis | Accepted |
