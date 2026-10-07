@@ -70,8 +70,8 @@ Theming runs on two independent axes, both driven by attributes — no component
 changes needed, because every component reads only semantic variables:
 
 - **Mode** — light is the default (`:root`); switch to dark with `data-theme="dark"`.
-- **Brand** — the default accent lives on `:root`; switch with `data-brand` (e.g.
-  the built-in `ocean` brand).
+- **Brand** — the default accent lives on `:root`; switch with `data-brand` (the
+  built-in `ocean`, `sunset`, and `forest` brands).
 
 ```html
 <html data-theme="dark" data-brand="ocean">
