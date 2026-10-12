@@ -1,5 +1,5 @@
-import { addons } from '@storybook/manager-api';
-import { create } from '@storybook/theming/create';
+import { addons } from 'storybook/manager-api';
+import { create } from 'storybook/theming';
 
 // Make the top-left brand a one-click jump to the sibling Storybook. The URL is resolved at
 // runtime so it works both locally (ports 6006 ↔ 6007) and on GitHub Pages (/core/ ↔ /react/).

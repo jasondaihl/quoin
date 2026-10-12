@@ -1,3 +1,4 @@
+import { playwright } from '@vitest/browser-playwright';
 import { defineConfig } from 'vitest/config';
 
 // Web components are tested in a real browser (Playwright/Chromium) so Shadow DOM,
@@ -6,9 +7,9 @@ export default defineConfig({
   test: {
     browser: {
       enabled: true,
-      provider: 'playwright',
+      provider: playwright(),
       headless: true,
-      name: 'chromium',
+      instances: [{ browser: 'chromium' }],
     },
     include: ['src/**/*.test.ts'],
   },
