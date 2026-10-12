@@ -51,6 +51,7 @@ const preview: Preview = {
           { value: 'ocean', title: 'Ocean', icon: 'circle' },
           { value: 'sunset', title: 'Sunset', icon: 'circle' },
           { value: 'forest', title: 'Forest', icon: 'circle' },
+          { value: 'scout', title: 'Scout', icon: 'circle' },
         ],
         dynamicTitle: true,
       },
