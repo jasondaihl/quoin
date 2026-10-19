@@ -65,7 +65,7 @@ export function getToken(path: string): TokenMeta | undefined {
 
 /**
  * Fuzzy search by path, CSS var, or value — case-insensitive substring match.
- * Useful for "which token is #4f46e5" or "find the accent colors".
+ * Useful for "which token is oklch(0.5106 0.2301 276.97)" or "find the accent colors".
  */
 export function searchTokens(query: string): TokenMeta[] {
   const q = query.trim().toLowerCase();

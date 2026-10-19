@@ -10,8 +10,8 @@ describe('getToken', () => {
     expect(accent).toBeDefined();
     expect(accent?.tier).toBe('semantic');
     expect(accent?.cssVar).toBe('--quoin-color-accent-default');
-    expect(accent?.value).toBe('#4f46e5');
-    expect(accent?.valueDark).toBe('#4f46e5'); // dark accent is indigo.600 too (AA with white text)
+    expect(accent?.value).toBe('oklch(0.5106 0.2301 276.97)');
+    expect(accent?.valueDark).toBe('oklch(0.5106 0.2301 276.97)'); // dark accent is indigo.600 too (AA with white text)
     expect(accent?.reference).toBe('{palette.indigo.600}');
   });
 
@@ -51,8 +51,8 @@ describe('tokenGroups', () => {
 });
 
 describe('searchTokens', () => {
-  it('finds a token by its resolved hex value', () => {
-    const hits = searchTokens('#4f46e5');
+  it('finds a token by its resolved oklch value', () => {
+    const hits = searchTokens('oklch(0.5106 0.2301 276.97)');
     expect(hits.some((t) => t.path === 'palette.indigo.600')).toBe(true);
     expect(hits.some((t) => t.path === 'color.accent.default')).toBe(true);
   });

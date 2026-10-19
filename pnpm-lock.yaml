@@ -144,6 +144,9 @@ importers:
 
   packages/tokens:
     devDependencies:
+      colorjs.io:
+        specifier: ^0.5.2
+        version: 0.5.2
       style-dictionary:
         specifier: ^5.6.1
         version: 5.6.1

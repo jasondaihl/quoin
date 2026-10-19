@@ -16,7 +16,7 @@ packages — `@jasondaihl/quoin-tokens`' token metadata (`dist/tokens.json`) and
 |------|--------------|
 | `list_tokens` | List tokens, optionally filtered by `tier` (`semantic` \| `primitive`) and/or top-level `group` (`color`, `space`, …). |
 | `get_token` | Resolve one token by dotted `path` → CSS var, type, light `value`, `valueDark`, and alias `reference`. |
-| `search_tokens` | Substring search across path, CSS var, and value (e.g. "which token is `#4f46e5`"). |
+| `search_tokens` | Substring search across path, CSS var, and value (e.g. "which token is `oklch(0.5106 0.2301 276.97)`"). |
 | `list_components` | Every component with its tag, React wrapper name, and summary. |
 | `get_component` | Full API for one component (by tag, React name, or bare name): props, slots, events, CSS parts, plus HTML + React usage snippets. |
 

@@ -65,8 +65,10 @@ server.registerTool(
     title: 'Search design tokens',
     description:
       'Case-insensitive substring search across token path, CSS var, and value. ' +
-      'Handy for "which token is #4f46e5" or finding every accent color.',
-    inputSchema: { query: z.string().describe('Substring to match, e.g. a hex value or "accent"') },
+      'Handy for "which token is oklch(0.5106 0.2301 276.97)" or finding every accent color.',
+    inputSchema: {
+      query: z.string().describe('Substring to match, e.g. an oklch value or "accent"'),
+    },
   },
   async ({ query }) => json(searchTokens(query)),
 );
