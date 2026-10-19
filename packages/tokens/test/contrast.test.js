@@ -1,8 +1,9 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { test } from 'node:test';
+import Color from 'colorjs.io';
 // WCAG AA contrast is a tested contract across every brand×mode theme. We read the built
-// stylesheet (literal hex, no aliases) and recompose each theme by the same CSS cascade the
+// stylesheet (literal oklch, no aliases) and recompose each theme by the same CSS cascade the
 // browser applies, then check role pairs. Run `pnpm build` first. See docs/adr/0009.
 
 const css = readFileSync(new URL('../dist/tokens.css', import.meta.url), 'utf8');
@@ -50,19 +51,11 @@ for (const brand of brands) {
   );
 }
 
-// --- WCAG relative-luminance contrast (sRGB) ---------------------------------------------
-function luminance(hex) {
-  const n = Number.parseInt(hex.slice(1), 16);
-  const chan = (c) => {
-    const s = c / 255;
-    return s <= 0.03928 ? s / 12.92 : ((s + 0.055) / 1.055) ** 2.4;
-  };
-  return 0.2126 * chan(n >> 16) + 0.7152 * chan((n >> 8) & 255) + 0.0722 * chan(n & 255);
-}
-function contrast(a, b) {
-  const [l1, l2] = [luminance(a), luminance(b)];
-  return (Math.max(l1, l2) + 0.05) / (Math.min(l1, l2) + 0.05);
-}
+// --- WCAG 2.1 contrast ---------------------------------------------------------------------
+// Values are authored/emitted as oklch; WCAG 2.x contrast is defined on sRGB relative
+// luminance, so we let colorjs.io parse the color and compute the WCAG21 ratio (it converts
+// through sRGB internally). Same engine Style Dictionary uses to emit the oklch.
+const contrast = (a, b) => new Color(a).contrast(b, 'WCAG21');
 const v = (theme, role) => themes[theme][`--quoin-color-${role}`];
 
 // label, foreground role, background role, required ratio

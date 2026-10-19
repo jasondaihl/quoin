@@ -18,8 +18,10 @@ const BUILD_PATH = 'dist/';
 //                      the @jasondaihl/quoin-mcp server reads to answer token queries.
 
 // Explicit transform list: we deliberately omit `size/rem` so authored dimension strings
-// (e.g. "12px") pass through verbatim, and keep `color/css` to normalize hex values.
-const TRANSFORMS = ['attribute/cti', 'name/kebab', 'color/css'];
+// (e.g. "12px") pass through verbatim, and use `color/oklch` to emit colors as OKLCH
+// (Style Dictionary's built-in transform, backed by colorjs.io). Source stays hex; this
+// converts at build time — lossless for our in-gamut sRGB palette.
+const TRANSFORMS = ['attribute/cti', 'name/kebab', 'color/oklch'];
 
 // Only semantic color roles (color.*) are themed; primitives stay in :root only.
 const isSemantic = (token) => token.path[0] === 'color';
