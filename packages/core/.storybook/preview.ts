@@ -1,4 +1,4 @@
-import type { Preview } from '@storybook/web-components';
+import type { Preview } from '@storybook/web-components-vite';
 // Load quoin tokens globally so the CSS custom properties exist on :root, then
 // register every quoin element.
 import '@jasondaihl/quoin-tokens/tokens.css';

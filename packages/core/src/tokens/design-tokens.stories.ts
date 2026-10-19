@@ -2,7 +2,7 @@
 // are also generated from. Reading it here keeps this reference in lockstep with
 // the tokens; new tokens show up automatically on the next build.
 import tokens from '@jasondaihl/quoin-tokens/tokens.json';
-import type { Meta, StoryObj } from '@storybook/web-components';
+import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { type TemplateResult, html } from 'lit';
 
 /** One row of the flat token metadata emitted by the tokens package. */

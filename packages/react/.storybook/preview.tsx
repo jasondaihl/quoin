@@ -1,4 +1,4 @@
-import type { Preview } from '@storybook/react';
+import type { Preview } from '@storybook/react-vite';
 // Tokens must be present on :root; importing core (via the Button) registers the element.
 import '@jasondaihl/quoin-tokens/tokens.css';
 
