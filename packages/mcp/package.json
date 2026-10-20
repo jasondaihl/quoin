@@ -34,7 +34,7 @@
     "@modelcontextprotocol/sdk": "^1.32.1",
     "@jasondaihl/quoin-core": "workspace:*",
     "@jasondaihl/quoin-tokens": "workspace:*",
-    "zod": "^4.6.5"
+    "zod": "^4.6.7"
   },
   "devDependencies": {
     "@types/node": "^22.10.5",

@@ -29,7 +29,7 @@
     "test": "node --test test/tokens.test.js test/contrast.test.js"
   },
   "devDependencies": {
-    "colorjs.io": "^0.5.2",
-    "style-dictionary": "^5.6.1"
+    "colorjs.io": "^0.7.1",
+    "style-dictionary": "^5.7.0"
   }
 }
