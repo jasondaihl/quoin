@@ -64,7 +64,7 @@ interface Oklch {
 
 function parseOklch(value: string): Oklch | null {
   const m = value.match(/oklch\(\s*([\d.]+)\s+([\d.]+)\s+([\d.]+)/i);
-  if (!m || !m[1] || !m[2] || !m[3]) return null;
+  if (!m?.[1] || !m?.[2] || !m?.[3]) return null;
   return { l: Number(m[1]), c: Number(m[2]), h: Number(m[3]) };
 }
 

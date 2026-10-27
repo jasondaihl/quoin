@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { test } from 'node:test';
 import Color from 'colorjs.io';
+
 // WCAG AA contrast is a tested contract across every brand×mode theme. We read the built
 // stylesheet (literal oklch, no aliases) and recompose each theme by the same CSS cascade the
 // browser applies, then check role pairs. Run `pnpm build` first. See docs/adr/0009.

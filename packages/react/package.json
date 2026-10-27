@@ -11,7 +11,9 @@
   },
   "description": "quoin React — thin React 19 wrappers around the quoin web components.",
   "type": "module",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",

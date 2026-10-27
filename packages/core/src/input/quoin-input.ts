@@ -1,5 +1,5 @@
 import { css, html, nothing } from 'lit';
-import { customElement, property, query, state } from 'lit/decorators.js';
+import { customElement, property, query } from 'lit/decorators.js';
 import { QuoinElement } from '../shared/base-element.js';
 
 export type QuoinInputType = 'text' | 'email' | 'password' | 'search' | 'tel' | 'url' | 'number';
@@ -130,8 +130,6 @@ export class QuoinInput extends QuoinElement {
 
   @property({ type: Boolean, reflect: true }) invalid = false;
 
-  @state() private touched = false;
-
   override firstUpdated() {
     this.internals.setFormValue(this.value);
     this.syncValidity();
@@ -167,7 +165,6 @@ export class QuoinInput extends QuoinElement {
   }
 
   private handleChange() {
-    this.touched = true;
     this.dispatchEvent(
       new CustomEvent('quoin-change', {
         detail: { value: this.value },
