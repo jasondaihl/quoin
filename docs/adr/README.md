@@ -38,3 +38,4 @@ old one's status to `Superseded by ADR-XXXX` (and link the two).
 | [0008](0008-multi-brand-theming.md) | Multi-brand theming on a brand × mode axis | Accepted |
 | [0009](0009-accessibility-wcag-aa.md) | Accessibility — WCAG AA as a tested contract | Accepted |
 | [0010](0010-oklch-color-space.md) | OKLCH as the emitted color space | Accepted |
+| [0011](0011-example-eval-for-mcp-server.md) | Example eval for the MCP server | Accepted |
