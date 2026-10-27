@@ -1,4 +1,4 @@
-import { LitElement, css } from 'lit';
+import { css, LitElement } from 'lit';
 
 /**
  * Base class for all quoin elements.

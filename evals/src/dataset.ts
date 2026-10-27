@@ -1,4 +1,4 @@
-import { type Grader, answerContains, oklchCloseTo, usedTool } from './graders.js';
+import { answerContains, type Grader, oklchCloseTo, usedTool } from './graders.js';
 
 // ---------------------------------------------------------------------------
 // The dataset.

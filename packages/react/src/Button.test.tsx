@@ -1,6 +1,6 @@
 import type { QuoinButton } from '@jasondaihl/quoin-core';
 import { act } from 'react';
-import { type Root, createRoot } from 'react-dom/client';
+import { createRoot, type Root } from 'react-dom/client';
 import { afterEach, expect, test, vi } from 'vitest';
 import { Button } from './Button.js';
 import { expectNoA11yViolations } from './test-utils.js';

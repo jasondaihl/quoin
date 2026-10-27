@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useRef } from 'react';
 import type { MutableRefObject, ReactNode, Ref } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 // Importing the core package registers <quoin-button> as a side effect.
 import '@jasondaihl/quoin-core';
 import type {

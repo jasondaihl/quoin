@@ -11,7 +11,9 @@
   },
   "description": "quoin core — framework-agnostic web components built with Lit.",
   "type": "module",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",

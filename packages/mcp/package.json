@@ -11,7 +11,9 @@
   },
   "description": "quoin MCP — a Model Context Protocol server exposing quoin's design tokens and component APIs to AI assistants.",
   "type": "module",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "bin": {
     "quoin-mcp": "./dist/index.js"
   },
