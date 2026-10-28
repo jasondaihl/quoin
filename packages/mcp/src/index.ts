@@ -2,7 +2,10 @@ import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { z } from 'zod';
 import { getComponent, listComponents } from './components.js';
+import { registerPrompts } from './prompts.js';
+import { registerResources } from './resources.js';
 import { getToken, listTokens, searchTokens, tokenGroups } from './tokens.js';
+import { checkComponent, checkToken } from './validate.js';
 
 // quoin MCP server: exposes the design system's tokens and component APIs to an
 // AI assistant over stdio, reading the generated @jasondaihl/quoin-tokens and @jasondaihl/quoin-core
@@ -110,6 +113,45 @@ server.registerTool(
     return json(component);
   },
 );
+
+// --- Validation tool -----------------------------------------------------------------
+
+server.registerTool(
+  'check_usage',
+  {
+    title: 'Validate token or component usage',
+    description:
+      'Check whether a token path, or a component (optionally a specific prop/attribute), ' +
+      'is valid before you use it. Returns valid:true with the resolved entry, or ' +
+      'valid:false with the nearest real suggestions — so you can self-correct instead of ' +
+      'emitting a wrong CSS var or an unsupported prop. Pass `token`, or `component` ' +
+      '(optionally with `prop`).',
+    inputSchema: {
+      token: z
+        .string()
+        .optional()
+        .describe('Dotted token path to validate, e.g. color.accent.default'),
+      component: z
+        .string()
+        .optional()
+        .describe('Component tag, React name, or bare name, e.g. Button'),
+      prop: z
+        .string()
+        .optional()
+        .describe('With `component`: a prop or attribute name to check on it'),
+    },
+  },
+  async ({ token, component, prop }) => {
+    if (token !== undefined) return json(checkToken(token));
+    if (component !== undefined) return json(checkComponent(component, prop));
+    return notFound('check_usage needs a `token` or a `component` argument.');
+  },
+);
+
+// --- Resources & prompts -------------------------------------------------------------
+
+registerResources(server);
+registerPrompts(server);
 
 // --- Connect over stdio --------------------------------------------------------------
 

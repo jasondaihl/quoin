@@ -166,6 +166,11 @@ export function listComponents(): Array<Pick<ComponentInfo, 'tag' | 'reactName' 
   return loadManifest().map(({ tag, reactName, summary }) => ({ tag, reactName, summary }));
 }
 
+/** Every component with its full normalized API — backs the `quoin://components.json` resource. */
+export function allComponents(): ComponentInfo[] {
+  return loadManifest();
+}
+
 /** Resolve a component by tag (`quoin-button`), React name (`Button`), or bare (`button`). */
 export function getComponent(name: string): ComponentInfo | undefined {
   const q = name.trim().toLowerCase();
