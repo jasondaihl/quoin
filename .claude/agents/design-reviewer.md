@@ -14,7 +14,10 @@ design, a component, or a token/brand change and report findings ranked by impac
   the real values, `get_component` for the API, `check_usage` to confirm a role exists.
 - **For contrast, don't eyeball it** — run `pnpm --filter @jasondaihl/quoin-tokens test`,
   which reports exactly which brand×mode pairs pass WCAG AA (see
-  [ADR-0009](../../docs/adr/0009-accessibility-wcag-aa.md)).
+  [ADR-0009](../../docs/adr/0009-accessibility-wcag-aa.md)). The test prints `advisory:`
+  lines (reported, not gated) alongside the `✔ … gated role pairs` assertions (these
+  block). Only a failing *gated* pair is a defect; treat an advisory dip (e.g. hover/active
+  on-accent) as polish, not a blocker.
 - You may lean on the `design:accessibility-review` and `design:design-critique` skills
   for structure.
 - **Report findings only — do not modify files.**
