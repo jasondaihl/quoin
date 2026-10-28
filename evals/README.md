@@ -93,9 +93,34 @@ already built for both:
 - **It costs tokens and time**, so a model eval usually runs on a schedule or before
   a release, while the offline heuristic runs on every push.
 
+## Baseline
+
+Every heuristic run is diffed against a committed snapshot,
+[`baseline.json`](baseline.json) (overall + per-case scores), so a change in the
+server or the dataset shows up as a movement in review instead of silently. The
+runner prints the diff and flags any case that regressed. Regenerate the snapshot
+deliberately after an intended change:
+
+```bash
+EVAL_UPDATE_BASELINE=1 pnpm eval
+```
+
+`results.json` (the full per-run detail) stays gitignored; `baseline.json` is the
+one committed, reviewable number-per-case.
+
+## In CI
+
+[`.github/workflows/eval.yml`](../.github/workflows/eval.yml) runs the heuristic
+suite on demand (`workflow_dispatch`) and nightly, uploading `results.json` as an
+artifact. It is **not** a required check — `verify` still gates `main` — so the
+score is a visible signal, not a merge blocker. The model run stays opt-in (it
+needs `ANTHROPIC_API_KEY`).
+
 ## Grow it
 
 The dataset is meant to grow. Each time you hit a question the server answers badly
 — a confusing token name, a missing component prop, a bad tool choice — add a case
 for it. The eval then keeps measuring that forever, and the score tells you,
 in one number, whether quoin is getting better or worse at serving an AI assistant.
+The `check-*` cases are the pattern: they grade the `check_usage` tool on both a
+valid input and a typo, so a regression in its suggestions shows up immediately.

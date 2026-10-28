@@ -19,6 +19,27 @@ packages — `@jasondaihl/quoin-tokens`' token metadata (`dist/tokens.json`) and
 | `search_tokens` | Substring search across path, CSS var, and value (e.g. "which token is `oklch(0.5106 0.2301 276.97)`"). |
 | `list_components` | Every component with its tag, React wrapper name, and summary. |
 | `get_component` | Full API for one component (by tag, React name, or bare name): props, slots, events, CSS parts, plus HTML + React usage snippets. |
+| `check_usage` | Validate a token `path`, or a `component` (optionally a `prop`), **before** using it → `valid: true` with the resolved entry, or `valid: false` with the nearest real suggestions, so an agent can self-correct a typo instead of emitting a wrong CSS var or prop. |
+
+## Resources
+
+The whole authoritative dataset as readable documents, for pulling the full
+picture into context in one read rather than many tool calls:
+
+| Resource | Contents |
+|----------|----------|
+| `quoin://tokens.json` | Every token (path, CSS var, type, tier, light/dark value, alias). |
+| `quoin://components.json` | Every component's full normalized API (props, slots, events, CSS parts/props, HTML + React usage). |
+
+## Prompts
+
+Guided, parameterized workflows that hand a client the recipe knowledge from the
+[`.claude/skills`](../../.claude/skills) — the "how", to go with the tools' "what":
+
+| Prompt | Argument | What it guides |
+|--------|----------|----------------|
+| `scaffold-component` | `name` | Adding a component the quoin way (web component → React wrapper, semantic tokens, real-Chromium + a11y tests). |
+| `add-brand` | `brand` | Adding a brand/theme overlay across light + dark, including the WCAG-AA contrast rule. |
 
 ## Usage
 

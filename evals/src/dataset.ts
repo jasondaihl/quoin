@@ -71,4 +71,28 @@ export const dataset: EvalCase[] = [
     note: "Teaching case: the eval prefers list_tokens for enumerating a group, but the heuristic agent — with no 'list/all' verb to trigger on — reaches for search_tokens instead. It still surfaces the radii, so it earns the content points but loses the tool-choice point: a partial score, which is exactly what evals exist to reveal.",
     graders: [usedTool('list_tokens'), answerContains(['radius.sm', 'radius.full'], 2)],
   },
+  // check_usage: validate-before-use, so an agent can self-correct a typo'd path or prop.
+  {
+    id: 'check-valid-token',
+    task: 'Is `space.5` a valid quoin token? Check it.',
+    graders: [usedTool('check_usage'), answerContains(['"valid": true', '16px'], 2)],
+  },
+  {
+    id: 'check-invalid-token',
+    task: 'Is `color.accent.bogus` a valid token, or did I make a typo?',
+    graders: [
+      usedTool('check_usage'),
+      answerContains(['"valid": false', 'color.accent.default'], 2),
+    ],
+  },
+  {
+    id: 'check-valid-prop',
+    task: 'Does the Button component accept a `variant` prop? Check before I use it.',
+    graders: [usedTool('check_usage'), answerContains(['"valid": true', 'variant'], 2)],
+  },
+  {
+    id: 'check-invalid-prop',
+    task: 'Does Button accept a `color` prop, or is that a typo?',
+    graders: [usedTool('check_usage'), answerContains(['"valid": false', 'variant'], 2)],
+  },
 ];

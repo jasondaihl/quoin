@@ -1,0 +1,18 @@
+{
+  "agent": "heuristic",
+  "overall": 0.972972972972973,
+  "cases": {
+    "accent-value": 1,
+    "accent-css-var": 1,
+    "space-5": 1,
+    "reverse-oklch": 1,
+    "button-react-usage": 1,
+    "input-fields": 1,
+    "list-components": 1,
+    "radius-scale": 0.6667,
+    "check-valid-token": 1,
+    "check-invalid-token": 1,
+    "check-valid-prop": 1,
+    "check-invalid-prop": 1
+  }
+}
