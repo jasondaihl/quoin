@@ -112,6 +112,21 @@ const STOPWORDS = new Set([
 export function plan(task: string): Plan {
   const lower = task.toLowerCase();
 
+  // 0. Validation questions ("is X a valid token?", "does Button accept a `foo` prop?")
+  //    → check_usage. Must come first: these also contain a token path or a component.
+  const isValidation =
+    /\b(valid|exists?|check|typo)\b/.test(lower) || /accepts?\b.*\bprop/.test(lower);
+  if (isValidation) {
+    const tokenPath = lower.match(/\b[a-z]+(?:\.[a-z0-9-]+)+\b/);
+    if (tokenPath) return { tool: 'check_usage', args: { token: tokenPath[0] } };
+    const comp = COMPONENTS.find((c) => new RegExp(`\\b${c}s?\\b`).test(lower));
+    if (comp) {
+      const backticked = task.match(/`([a-zA-Z0-9-]+)`/); // a prop name in backticks
+      const prop = backticked?.[1];
+      return { tool: 'check_usage', args: prop ? { component: comp, prop } : { component: comp } };
+    }
+  }
+
   // 1. An explicit oklch(...) value → reverse-lookup which token it is.
   const oklch = task.match(/oklch\([^)]*\)/i);
   if (oklch) return { tool: 'search_tokens', args: { query: oklch[0] } };
