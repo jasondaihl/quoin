@@ -44,7 +44,7 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          node-version: 20
+          node-version: 24
           cache: pnpm
           # Writes an .npmrc pointing the @jasondaihl scope at GitHub Packages,
           # authenticated via NODE_AUTH_TOKEN (set on the release step below).

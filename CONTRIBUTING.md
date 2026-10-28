@@ -5,7 +5,7 @@ keep `main` healthy and keep future-me from having to re-derive decisions.
 
 ## Prerequisites & setup
 
-- **Node** ≥ 20 and **pnpm** (the repo pins a version via `packageManager`).
+- **Node** ≥ 24 (see `.nvmrc`) and **pnpm** (the repo pins a version via `packageManager`).
 - Install dependencies:
   ```sh
   pnpm install
