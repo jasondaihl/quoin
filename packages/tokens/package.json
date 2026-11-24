@@ -32,6 +32,6 @@
   },
   "devDependencies": {
     "colorjs.io": "^0.7.1",
-    "style-dictionary": "^5.7.1"
+    "style-dictionary": "^5.8.0"
   }
 }
